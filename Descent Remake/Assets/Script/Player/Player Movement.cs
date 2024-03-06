@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         xRot=Input.GetAxis("Mouse X");
         zMove = Input.GetAxis("Vertical");
         zRot=Input.GetAxis("Horizontal");
-        Debug.Log(zMove);
     }
 
     private void FixedUpdate()
