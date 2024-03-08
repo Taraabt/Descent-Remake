@@ -1,39 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+
 
 public class PlayerMovement : MonoBehaviour
 {
 
     float zMove;
-    float zRot,yRot,xRot;
+    float zRot, yRot, xRot;
     Rigidbody rb;
+    Vector3 xyz;
+    Vector3 tRot;
+
+    float oldX;
+    float oldY;
 
 
     [SerializeField] float rotationSpeed;
+    [SerializeField] float mouseSensitivity;
     [SerializeField] float speed;
+
     void Start()
     {
-        zMove = Input.GetAxis("Vertical");
-        rb =this.gameObject.GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
+
+
+        rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        yRot = Input.GetAxis("Mouse Y");
-        xRot=Input.GetAxis("Mouse X");
+
+        float y = Input.GetAxis("Mouse Y");
+        float x = Input.GetAxis("Mouse X");
+
+        xRot = yRot = 0;
+
+        if (x != oldX)
+        {
+            xRot = x*mouseSensitivity;
+        }
+
+        if (y != oldY)
+        {
+            yRot = y* mouseSensitivity;
+        }
+
+        zRot = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime * -1;
+        xyz = new Vector3(-yRot, xRot, zRot);
+        tRot = transform.right + transform.up + transform.forward;
         zMove = Input.GetAxis("Vertical");
-        zRot=Input.GetAxis("Horizontal");
-        Debug.Log(zMove);
+
+        oldX = x;
+        oldY = y;
     }
 
     private void FixedUpdate()
     {
-
         rb.velocity = transform.forward * speed * zMove;
-        float rotMulti = 360 * Time.deltaTime * rotationSpeed;
-        Vector3 rotation=new Vector3 (-yRot, xRot, zRot);
-        transform.Rotate(rotation*rotMulti);
+        transform.Rotate(xyz);
     }
 
 }
