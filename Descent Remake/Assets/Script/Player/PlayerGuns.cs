@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class PlayerGuns : MonoBehaviour
 {
-    [SerializeField] Holster[] holsters;
-    int index;
-    [SerializeField] Holster[,] equipedHolsters;
+    int index1 = 0;
+    int index2 = 0;
+
+    public PrimaryGun primary;
+    public PrimaryGun secondary;
+
     Gun gun1, gun2;
     MagType mag1, mag2;
 
@@ -15,107 +18,71 @@ public class PlayerGuns : MonoBehaviour
         reloadedPrimary = true,
         reloadedSecondary = true;
 
-    void Start()
-    {
-        int hLenght = holsters.Length;
-
-        if (hLenght % 2 != 0)
-        {
-            hLenght--;
-        }
-
-
-        index = 0;
-        equipedHolsters = new Holster[hLenght / 2, 2];
-        int x = 0;
-        for (int i = 0; i < hLenght; i += 2)
-        {
-            equipedHolsters[x, 0] = holsters[i];
-            equipedHolsters[x, 1] = holsters[i+1];
-            if (x < hLenght / 2)
-                x++;
-            Debug.Log(holsters[i].magType.bullet.name + " " + holsters[i+1].magType.bullet.name);
-        }
-
-        Debug.Log(equipedHolsters.Length);
-    }
 
     // Update is called once per frame
     void Update()
     {
+        int changeWeapon = (int)Input.GetAxisRaw("ChangeWeapons");
 
-        if (Input.GetButtonDown("ChangeWeapons") == true)
+        if (changeWeapon > 0)
         {
-            if (index + 2 < holsters.Length)
+
+            index1 += 1;
+            if (index1 > primary.Guns.Count)
             {
-                index += 2;
-                reloadedPrimary = reloadedSecondary = true;
+                index1 = 0;
+                Debug.Log(index1);
             }
         }
-        else if (Input.GetButtonDown("ChangeWeapons") == true)
+        else if (changeWeapon < 0)
         {
-            if (index - 2 >= 0)
+            index2 -= 1;
+            if (index2 < 0)
             {
-                index -= 2;
-                reloadedPrimary = reloadedSecondary = true;
+                index2 = secondary.Guns.Count - 1;
+                Debug.Log(index2);
+                Debug.LogWarning(changeWeapon + "/" + index2);
             }
         }
 
-        gun1 = equipedHolsters[index, 0].gun;
-        gun2 = equipedHolsters[index, 1].gun;
+        gun1 = primary.Guns[index1].gun;
+        gun2 = secondary.Guns[index2].gun;
 
-        mag1 = equipedHolsters[index, 0].magType;
-        mag2 = equipedHolsters[index, 1].magType;
+        mag1 = primary.Guns[index1].magType;
+        mag2 = secondary.Guns[index2].magType;
 
         if (Input.GetButtonDown("Fire1") && reloadedPrimary)
         {
-            Gun primaryGun = null;
-            if (equipedHolsters[index, 0].isPrimaryFire)
-            {
-                gun1.Shoot(mag1);
-                primaryGun = gun1;
-            }
-            else if (equipedHolsters[index, 1].isPrimaryFire)
-            {
-                gun2.Shoot(mag2);
-                primaryGun = gun2;
-            }
-
-            if (primaryGun != null)
-            {
-                StartCoroutine(ReloadTime(primaryGun.ReloadTime, reloadedPrimary));
-            }
+            gun1.Shoot(mag1);
+            StartCoroutine(ReloadTime(gun1.ReloadTime, true));
         }
 
         if (Input.GetButtonDown("Fire2") && reloadedSecondary)
         {
-            Debug.Log("ops");
-            Gun secondaryGun = null;
-
-            if (equipedHolsters[index, 0].isPrimaryFire == false)
-            {
-                gun1.Shoot(mag1);
-                secondaryGun = gun1;
-            }
-            else if (equipedHolsters[index, 1].isPrimaryFire == false)
-            {
-
-                gun2.Shoot(mag2);
-                secondaryGun = gun2;
-            }
-
-            if (secondaryGun != null)
-            {
-                StartCoroutine(ReloadTime(secondaryGun.ReloadTime, reloadedSecondary));
-            }
+            gun2.Shoot(mag2);
+            StartCoroutine(ReloadTime(gun2.ReloadTime, false));
         }
 
     }
 
-    IEnumerator ReloadTime(float time, bool isReloaded)
+    IEnumerator ReloadTime(float time, bool isPrimary)
     {
-        isReloaded = false;
+        if (isPrimary)
+            reloadedPrimary = false;
+        else
+            reloadedSecondary = false;
+
         yield return new WaitForSeconds(time);
-        isReloaded = true;
+
+        if (isPrimary)
+            reloadedPrimary = true;
+        else
+            reloadedSecondary = true;
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+
     }
 }

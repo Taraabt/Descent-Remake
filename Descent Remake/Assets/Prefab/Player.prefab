@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 6237005114948809942}
   - component: {fileID: 1222122332604313206}
   - component: {fileID: 2272354047962664216}
+  - component: {fileID: 2180982182680472685}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -201,7 +202,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &6237005114948809942
 BoxCollider:
@@ -236,35 +237,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a555fc49cb6164b9d4826a5b6abc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holsters:
-  - isPrimaryFire: 1
-    gun:
-      ammoPerShot: 2
-      ReloadTime: 0.3
-      MaxHitScanLenght: 0
-      dmg: 0
-      spawnPoint: {fileID: 7467014352894533730}
-      isAutomatic: 0
-      isProjectile: 1
-    magType:
-      mags: {fileID: 0}
-      bullet: {fileID: 6216604623322067488, guid: b19792ce19d0db1418f6c2bb54649825,
-        type: 3}
-      ammo: 900
-  - isPrimaryFire: 0
-    gun:
-      ammoPerShot: 1
-      ReloadTime: 0.3
-      MaxHitScanLenght: 0
-      dmg: 0
-      spawnPoint: {fileID: 7467014352894533730}
-      isAutomatic: 0
-      isProjectile: 1
-    magType:
-      mags: {fileID: 0}
-      bullet: {fileID: 2350696401621947646, guid: 810ba594bfc5c7d4baa22d32169825ae,
-        type: 3}
-      ammo: 900
+  primary:
+    Guns:
+    - IsEnemy: 0
+      gun:
+        ammoPerShot: 2
+        ReloadTime: 0.3
+        MaxHitScanLenght: 0
+        dmg: 1
+        spawnPoint: {fileID: 7467014352894533730}
+        isProjectile: 1
+      magType:
+        mags: {fileID: 0}
+        bullet: {fileID: 6216604623322067488, guid: b19792ce19d0db1418f6c2bb54649825,
+          type: 3}
+        ammo: 100
+      isPrimary: 1
+  secondary:
+    Guns:
+    - IsEnemy: 0
+      gun:
+        ammoPerShot: 1
+        ReloadTime: 1
+        MaxHitScanLenght: 0
+        dmg: 1
+        spawnPoint: {fileID: 7467014352894533730}
+        isProjectile: 1
+      magType:
+        mags: {fileID: 0}
+        bullet: {fileID: 2350696401621947646, guid: 810ba594bfc5c7d4baa22d32169825ae,
+          type: 3}
+        ammo: 100
+      isPrimary: 1
 --- !u!114 &2272354047962664216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,9 +281,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2d759bb03badb4ba3d554fb9ae1be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0.5
+  rotationSpeed: 360
   mouseSensitivity: 1
-  speed: 2
+  speed: 1
+--- !u!114 &2180982182680472685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4267732638711118508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162135f38d498454f96bcf531fe2cb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5610170953260050558
 GameObject:
   m_ObjectHideFlags: 0
