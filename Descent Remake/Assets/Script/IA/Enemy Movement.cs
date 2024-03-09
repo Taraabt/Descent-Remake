@@ -42,6 +42,9 @@ public class EnemyMovement : MonoBehaviour
                     Vector3 direction = player.transform.position - transform.position;
                     rb.velocity = direction;
                 }
+                else{
+                    rb.velocity = Vector3.zero;
+                }
             }
         }
 
