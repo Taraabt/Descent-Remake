@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AmmoBox : MonoBehaviour
 {
-    public MagType ammoType;
+    public Ammo ammoType;
 }

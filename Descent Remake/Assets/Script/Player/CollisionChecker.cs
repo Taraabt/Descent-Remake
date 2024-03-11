@@ -10,7 +10,7 @@ public class CollisionChecker : MonoBehaviour
     private void Start()
     {
         player = gameObject;
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,20 +22,20 @@ public class CollisionChecker : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 
     void AmmoBoxCheck(Collider other)
     {
         if (other.gameObject.layer == 10)// is a Magbox
         {
-            PrimaryGun primary = player.GetComponent<PlayerGuns>().primary;
-            PrimaryGun secondary = player.GetComponent<PlayerGuns>().secondary;
+            List<Holster> primary = player.GetComponent<PlayerGuns>().primary;
+            List<Holster> secondary = player.GetComponent<PlayerGuns>().secondary;
 
             List<Holster> allGuns = new();
 
-            allGuns.AddRange(primary.Guns);
-            allGuns.AddRange(secondary.Guns);
+            allGuns.AddRange(primary);
+            allGuns.AddRange(secondary);
 
             MagType otherMag = other.gameObject.GetComponent<MagType>();
 
@@ -43,7 +43,7 @@ public class CollisionChecker : MonoBehaviour
             {
                 if (findAmmo.magType.bullet == otherMag.bullet)
                 {
-                    findAmmo.magType.ammo += otherMag.ammo;
+                    findAmmo.magType.ammo.ammo += otherMag.ammo.ammo;
                 }
             }
 
@@ -56,22 +56,22 @@ public class CollisionChecker : MonoBehaviour
     {
         if (other.gameObject.layer == 11)// is a Magbox
         {
-            PrimaryGun primary = player.GetComponent<PlayerGuns>().primary;
-            PrimaryGun secondary = player.GetComponent<PlayerGuns>().secondary;
+            List<Holster> primary = player.GetComponent<PlayerGuns>().primary;
+            List<Holster> secondary = player.GetComponent<PlayerGuns>().secondary;
 
             List<Holster> allGuns = new();
 
-            allGuns.AddRange(primary.Guns);
-            allGuns.AddRange(secondary.Guns);
+            allGuns.AddRange(primary);
+            allGuns.AddRange(secondary);
 
-            Holster otherMag = other.gameObject.GetComponent<GunPickUp>().OtherMag;
+            Holster otherGun = other.gameObject.GetComponent<GunPickUp>().OtherMag;
 
             int i = 0;
             foreach (Holster findAmmo in allGuns)
             {
-                if (findAmmo.magType.bullet == otherMag.magType.bullet)
+                if (findAmmo.magType.bullet == otherGun.magType.bullet)
                 {
-                    findAmmo.magType.ammo += otherMag.magType.ammo;
+                    findAmmo.magType.ammo.ammo += otherGun.magType.ammo.ammo;
                 }
                 else
                 {
@@ -81,13 +81,13 @@ public class CollisionChecker : MonoBehaviour
 
             if (i >= allGuns.Count)
             {
-                if (otherMag.isPrimary)
+                if (otherGun.isPrimary)
                 {
-                    player.GetComponent<PlayerGuns>().primary.Guns.Add(otherMag);
+                    player.GetComponent<PlayerGuns>().primary.Add(otherGun);
                 }
                 else
                 {
-                    player.GetComponent<PlayerGuns>().secondary.Guns.Add(otherMag);
+                    player.GetComponent<PlayerGuns>().secondary.Add(otherGun);
                 }
             }
 

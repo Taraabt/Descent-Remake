@@ -8,58 +8,62 @@ public class PlayerGuns : MonoBehaviour
     int index1 = 0;
     int index2 = 0;
 
-    public PrimaryGun primary;
-    public PrimaryGun secondary;
+    public List<Holster> primary;
+    public List<Holster> secondary;
 
     Gun gun1, gun2;
     MagType mag1, mag2;
+
+    [SerializeField] Transform gunTransform;
 
     bool
         reloadedPrimary = true,
         reloadedSecondary = true;
 
 
-    // Update is called once per frame
     void Update()
     {
-        int changeWeapon = (int)Input.GetAxisRaw("ChangeWeapons");
+        float changeWeapon = Input.GetAxisRaw("ChangeWeapons");
 
-        if (changeWeapon > 0)
+
+
+        if (changeWeapon > 0) // Pressed E
         {
 
             index1 += 1;
-            if (index1 > primary.Guns.Count)
+            if (index1 >= primary.Count)
             {
                 index1 = 0;
-                Debug.Log(index1);
+                
             }
         }
-        else if (changeWeapon < 0)
+        else if (changeWeapon < 0) // pressed Q
         {
-            index2 -= 1;
-            if (index2 < 0)
+            index2 += 1;
+            if (index2 >= secondary.Count)
             {
-                index2 = secondary.Guns.Count - 1;
-                Debug.Log(index2);
-                Debug.LogWarning(changeWeapon + "/" + index2);
+                index2 = 0;
             }
         }
 
-        gun1 = primary.Guns[index1].gun;
-        gun2 = secondary.Guns[index2].gun;
+        gun1 = primary[index1].gun;
+        gun2 = secondary[index2].gun;
 
-        mag1 = primary.Guns[index1].magType;
-        mag2 = secondary.Guns[index2].magType;
+        mag1 = primary[index1].magType;
+        mag2 = secondary[index2].magType;
+
 
         if (Input.GetButtonDown("Fire1") && reloadedPrimary)
         {
-            gun1.Shoot(mag1);
+
+            gun1.Shoot(mag1, gunTransform);
             StartCoroutine(ReloadTime(gun1.ReloadTime, true));
         }
 
         if (Input.GetButtonDown("Fire2") && reloadedSecondary)
         {
-            gun2.Shoot(mag2);
+
+            gun2.Shoot(mag2, gunTransform);
             StartCoroutine(ReloadTime(gun2.ReloadTime, false));
         }
 
@@ -78,11 +82,5 @@ public class PlayerGuns : MonoBehaviour
             reloadedPrimary = true;
         else
             reloadedSecondary = true;
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-
     }
 }
