@@ -34,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
 
         if (checkPlayer)
         {
@@ -70,7 +70,7 @@ public class EnemyMovement : MonoBehaviour
                 }
                 else if (hasObstacle == true)
                 {
-                    targetPos = transform.position + (Vector3.forward * collided.bounds.size.z);
+                    targetPos = transform.position + (-Vector3.forward * collided.bounds.size.z);
                 }
             }
         }
