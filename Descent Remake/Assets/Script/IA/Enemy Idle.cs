@@ -8,18 +8,18 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class EnemyIdle : MonoBehaviour{
 
 
-    [SerializeField] RoomEntry entry;
-    [SerializeField] RoomExit exit;
-    Rigidbody rb;
+    public RoomEntry entry;
+    public RoomExit exit;
+    public Rigidbody rb;
 
-    bool hasObstacle;
-    [SerializeField] float enemySpeed;
-    float targetDistance;
+    public bool hasObstacle;
+    public float enemySpeed;
+    public float targetDistance;
 
-    Vector3 startPos;
-    private Vector3 target;
-    float x, y, z;
-    RaycastHit hit;
+    public Vector3 startPos;
+    public Vector3 target;
+    public float x, y, z;
+    public RaycastHit hit;
 
     private void Start()
     {

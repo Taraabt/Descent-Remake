@@ -6,43 +6,54 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    List<Vector3> positions;
-    List<Vector3> returnPositions;
+    public List<Vector3> positions;
+    public List<Vector3> returnPositions;
 
-    RaycastHit hit;
+    public BaseEnemyStates state;
 
-    Vector3 startPos;
+    public RaycastHit hit;
 
-    [SerializeField] EnemyIdle idle;
+    public Vector3 startPos;
 
-    [SerializeField] Transform player;
-    [SerializeField] SphereCollider Mycollider;
+    public EnemyIdle idle;
 
-    [SerializeField] Rigidbody rb;
+    public Transform player;
+    public SphereCollider Mycollider;
 
-    [SerializeField] float maxDistChase;
-    [SerializeField] float speed;
-    [SerializeField] float gapToPlayer;
+    public Rigidbody rb;
 
-    Vector3 dir;
+    public float maxDistChase;
+    public float speed;
+    public float gapToPlayer;
 
-    [SerializeField] float startDis = 0.1f;
-    [SerializeField] float ChaseDuration = 70f;
-    [SerializeField] float durationForUnstucking = 5f;
+    public Vector3 dir;
 
-    delegate void KillIdle();
-    delegate void RestartIdle();
-    event KillIdle OnKillIdle;
-    event RestartIdle OnRestartIdle;
+    public float startDis = 0.1f;
+    public float ChaseDuration = 70f;
+    public float durationForUnstucking = 5f;
 
-    float distToPositons;
-    float timer;
+    public delegate void KillIdle();
+    public delegate void RestartIdle();
+    public event KillIdle OnKillIdle;
+    public event RestartIdle OnRestartIdle;
 
-    float timerTillUnstuck;
+    public float distToPositons;
+    public float timer;
 
-    bool hasPos;
-    bool returnHome;
-    bool isFirstLostCheckDone;
+    public float timerTillUnstuck;
+
+    public bool hasPos;
+    public bool returnHome;
+    public bool isFirstLostCheckDone;
+
+
+
+    public void OnChangeState(BaseEnemyStates newState)
+    {
+        state = newState;
+        state.OnEnter(this);
+    }
+
 
     private void Start()
     {
@@ -103,8 +114,6 @@ public class EnemyAI : MonoBehaviour
             hasPos = true;
             returnHome = false;
             distToPositons = gapToPlayer;
-            speed = 100;
-            timer = 0;
         }
 
         OnKillIdle?.Invoke();
