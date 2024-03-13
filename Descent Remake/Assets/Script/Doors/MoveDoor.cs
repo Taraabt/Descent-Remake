@@ -10,7 +10,7 @@ public class MoveDoor : MonoBehaviour
     [SerializeField] Door door;
     Vector3 startPos;
     [SerializeField] Vector3 dirPos;
-    bool isOpen;
+    bool canOpen, isOpen;
     float time = 0;
     float duration =0;
     float lerpDur=0;
@@ -41,31 +41,38 @@ public class MoveDoor : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isOpen);
-        if(isOpen) {
+        Debug.Log(canOpen);
+        if(canOpen&&!isOpen){
             if (time < lerpDur){
                 transform.localPosition = Vector3.Lerp(startPos, startPos + dirPos * 5, time / lerpDur);
                 time += Time.deltaTime;
             }else{
-                isOpen = false;
+                isOpen = true;
                 duration = door.duration;
             }
-        }else if(isOpen==false){
-            if (duration>0){
-                time = 0;
-                lerpDur = door.lerpDuration;
-                duration -= Time.deltaTime;
-            }
-            else if(time < lerpDur)
+        }else if(isOpen==true&&duration>0){
+            time = 0;
+            duration -= Time.deltaTime;
+        }else if (isOpen == true&&duration<=0)
+        {
+            if (time < lerpDur)
             {
-                transform.localPosition = Vector3.Lerp(startPos + dirPos * 5, startPos , time / lerpDur);
+                transform.localPosition = Vector3.Lerp(startPos + dirPos * 5, startPos, time / lerpDur);
                 time += Time.deltaTime;
+            }
+            else
+            {
+                time=0;
+                canOpen = false;
+                isOpen = false;
             }
         }
 
     }
     private void Start()
     {
+        lerpDur=door.lerpDuration;
+        isOpen = false;
         time=0;
         startPos=transform.localPosition;
     }
@@ -114,10 +121,7 @@ public class MoveDoor : MonoBehaviour
 
     public void Move()
     {
-        if (!isOpen)
-        {
-            isOpen = true;
-        }
+            canOpen = true;
         //StartCoroutine(OpenDoor());
     }
     public void MoveWithKey()
