@@ -8,14 +8,16 @@ public class EnemyAI : MonoBehaviour
 {
     public List<Vector3> positions;
     public List<Vector3> returnPositions;
+    public Vector3 target;
+    public Vector3 direction;
+
+    public List<Vector3> rayCastDirs;
 
     public BaseEnemyStates state;
 
     public RaycastHit hit;
 
     public Vector3 startPos;
-
-    public EnemyIdle idle;
 
     public Transform player;
     public SphereCollider Mycollider;
@@ -29,22 +31,18 @@ public class EnemyAI : MonoBehaviour
     public Vector3 dir;
 
     public float startDis = 0.1f;
-    public float ChaseDuration = 70f;
     public float durationForUnstucking = 5f;
 
-    public delegate void KillIdle();
-    public delegate void RestartIdle();
-    public event KillIdle OnKillIdle;
-    public event RestartIdle OnRestartIdle;
+    public float maxRayDistance = 2;
+    public float idleRange = 1;
 
-    public float distToPositons;
-    public float timer;
 
-    public float timerTillUnstuck;
 
-    public bool hasPos;
-    public bool returnHome;
-    public bool isFirstLostCheckDone;
+    [HideInInspector] public float distToPositons;
+    [HideInInspector] public float timer;
+    [HideInInspector] public float timerTillUnstuck;
+
+    [HideInInspector] public bool isFirstLostCheckDone;
 
 
 
@@ -57,85 +55,56 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
+
         startPos = transform.position;
         positions = new();
-        returnPositions = new() { startPos };
+        returnPositions = new();
         distToPositons = startDis;
-        OnKillIdle += StopIdle;
-        OnRestartIdle += StartIdle;
+        state = new Idle();
+        state.OnEnter(this);
     }
 
     private void Update()
     {
-
-        if (hasPos)
-        {
-            Chasing();
-            if (Vector3.Distance(transform.position, player.position) > maxDistChase)
-            {
-                StopChase();
-            }
-        }
-        else if (returnHome) // HERE IS THE RETURN HOME THINGY
-        {
-            GoingHome();
-        }
-
+        state.OnUpdate(this);
     }
 
     private void FixedUpdate()
     {
-        if (positions.Count > 0 && hasPos)
-        {
-            dir = positions[0] - transform.position;
-
-            transform.LookAt(positions[0]);
-
-            rb.velocity = speed * Time.fixedDeltaTime * dir.normalized;
-        }
-        else if (returnPositions.Count > 0 && returnHome)
-        {
-            dir = returnPositions[0] - transform.position;
-
-            transform.LookAt(returnPositions[0]);
-            rb.velocity = speed * Time.fixedDeltaTime * dir.normalized;
-        }
+        state.OnFixedUpdate(this);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        dir = player.position - transform.position;
-        Physics.Raycast(transform.position, dir.normalized, out hit, Mycollider.radius);
-
-        if (hit.transform == player)
-        {
-            positions.Clear();
-            positions.Add(player.position);
-            hasPos = true;
-            returnHome = false;
-            distToPositons = gapToPlayer;
-        }
-
-        OnKillIdle?.Invoke();
+        state.OnStay(this);
     }
 
-    void StopIdle()
+    public void StartIdle()
     {
-        idle.enabled = false;
-        OnKillIdle -= StopIdle;
-    }
-
-    void StartIdle()
-    {
-        idle.enabled = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
-    void UnStuck(List<Vector3> givenPosis)
+    public void UnStuck(List<Vector3> givenPosis)
     {
+        float higherDot = -9;
+        RaycastHit hitted;
+        Vector3 newPos = Vector3.zero;
         if (timerTillUnstuck > durationForUnstucking)
         {
-            Vector3 newPos = givenPosis[0] * Random.Range(1f, 2f);
+            
+            foreach (Vector3 dir in rayCastDirs)
+            {
+                Physics.Raycast(transform.position, dir, out hitted);
+
+                if (Vector3.Distance(hitted.point, transform.position) > maxRayDistance)
+                {
+                    float dot = Vector3.Dot(dir, givenPosis[0]);
+                    if (dot > higherDot)
+                        higherDot = dot;
+                    newPos = transform.position + dir;
+                }
+
+            }
             givenPosis.Insert(0, newPos);
             timerTillUnstuck = 0;
         }
@@ -145,18 +114,15 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void StopChase()
+    public void StopChase()
     {
         timerTillUnstuck = 0;
-        hasPos = false;
-        returnHome = true;
         isFirstLostCheckDone = false;
-        speed *= 3;
         positions.Clear();
     }
 
 
-    void Chasing()
+    public void Chasing()
     {
 
         if (Vector3.Distance(returnPositions[0], transform.position) > startDis)
@@ -172,20 +138,10 @@ public class EnemyAI : MonoBehaviour
 
         if (hit.transform != player)
         {
-            if (isFirstLostCheckDone == false)
+            if (Vector3.Distance(positions[positions.Count - 1], player.position) > startDis)
             {
-                positions.Clear();
-                isFirstLostCheckDone = true;
-                positions.Add(player.position - (player.forward * 2));
+                positions.Add(player.position);
             }
-            else
-            {
-                if (Vector3.Distance(positions[positions.Count - 1], player.position) > startDis)
-                {
-                    positions.Add(player.position);
-                }
-            }
-
             distToPositons = startDis;
         }
 
@@ -200,7 +156,7 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    void GoingHome()
+    public void GoingHome()
     {
         UnStuck(returnPositions);
 
@@ -212,9 +168,9 @@ public class EnemyAI : MonoBehaviour
         if (returnPositions.Count <= 0 || Vector3.Distance(transform.position, startPos) < 0.5f)
         {
             transform.position = startPos;
-            returnHome = false;
+
             returnPositions.Clear();
-            OnRestartIdle?.Invoke();
+
             returnPositions.Add(startPos);
         }
     }
@@ -226,8 +182,22 @@ public class EnemyAI : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, dir);
 
+
+        Gizmos.color = Color.cyan;
+        if (target != null)
+        {
+            Gizmos.DrawSphere(target, 0.5f);
+        }
+
         if (Application.isPlaying)
         {
+
+            Gizmos.color = Color.white;
+            Gizmos.DrawRay(transform.position, direction.normalized);
+
+            Gizmos.DrawSphere(transform.position + direction.normalized * direction.magnitude, 0.5f);
+
+
             Gizmos.color = Color.yellow;
 
             Gizmos.DrawWireSphere(transform.position, maxDistChase);

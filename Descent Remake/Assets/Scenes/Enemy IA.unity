@@ -140,7 +140,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &49318100
 Transform:
@@ -151,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 49318099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 5, z: 0}
+  m_LocalPosition: {x: -5.5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -338,7 +338,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &136173792
 Transform:
@@ -656,7 +656,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &309615187
 Transform:
@@ -667,7 +667,7 @@ Transform:
   m_GameObject: {fileID: 309615186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.01, y: 5, z: 0}
+  m_LocalPosition: {x: 5.5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -753,7 +753,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 608795756}
-  - component: {fileID: 608795759}
   - component: {fileID: 608795761}
   - component: {fileID: 608795763}
   - component: {fileID: 608795762}
@@ -774,28 +773,13 @@ Transform:
   m_GameObject: {fileID: 608795755}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 1.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1837735853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &608795759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608795755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c1384ea03553c4eab064d7875a2b83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entry: {fileID: 1084527580}
-  exit: {fileID: 2087718564}
-  enemySpeed: 2
 --- !u!54 &608795761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -835,16 +819,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ee2f22acabc9048a21857cba9b27a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idle: {fileID: 608795759}
+  positions: []
+  returnPositions: []
+  target: {x: 0, y: 0, z: 0}
+  rayCastDirs:
+  - {x: 1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: -1}
+  startPos: {x: 0, y: 0, z: 0}
   player: {fileID: 263316180}
   Mycollider: {fileID: 608795763}
   rb: {fileID: 608795761}
-  maxDistChase: 100
+  maxDistChase: 30
   speed: 100
-  gapToPlayer: 5
+  gapToPlayer: 4
+  dir: {x: 0, y: 0, z: 0}
   startDis: 1
-  ChaseDuration: 30
   durationForUnstucking: 5
+  maxRayDistance: 2
+  idleRange: 4
+  distToPositons: 0
+  timer: 0
+  timerTillUnstuck: 0
+  isFirstLostCheckDone: 0
 --- !u!135 &608795763
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1396,7 +1396,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2133689265
 Transform:
