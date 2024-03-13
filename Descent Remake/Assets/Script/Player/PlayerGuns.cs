@@ -23,8 +23,10 @@ public class PlayerGuns : MonoBehaviour
 
     void Update()
     {
-        float changeWeapon = Input.GetAxisRaw("ChangeWeapons");
+        float changeWeapon = 0;
 
+        if (Input.GetButtonDown("ChangeWeapons"))
+            changeWeapon = Input.GetAxisRaw("ChangeWeapons");
 
 
         if (changeWeapon > 0) // Pressed E
@@ -83,4 +85,45 @@ public class PlayerGuns : MonoBehaviour
         else
             reloadedSecondary = true;
     }
+
+
+    bool isopen = false;
+
+    private IEnumerator open()
+    {
+        if (isopen == true)
+        {
+            yield return null;
+            StopCoroutine(open());
+        }
+
+        int x = 100;
+        while (10 < x)
+        {
+            x--;
+            yield return null;
+        }
+        yield return new WaitForSeconds(x);
+        isopen = true;
+        StartCoroutine(close());
+    }
+
+    private IEnumerator close()
+    {
+        if (isopen == false)
+        {
+            yield return null;
+            StopCoroutine(close());
+        }
+
+        int x = 10;
+        while (x<100)
+        {
+            x++;
+            yield return null;
+        }
+
+        isopen = false;
+    }
+
 }

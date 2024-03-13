@@ -28,7 +28,7 @@ public class EnemyIdle : MonoBehaviour{
         x = Random.Range(-4.5f, 4.5f);
         y = Random.Range(0.5f, 2.5f);
         z = Random.Range(-1f, 1f);
-        target = new Vector3(x, y, z);
+        target = new Vector3(startPos.x + x, startPos.y + y, startPos.z + z);
     }
 
     void Update(){
@@ -45,7 +45,7 @@ public class EnemyIdle : MonoBehaviour{
             x = Random.Range(-4.5f, 4.5f);
             y = Random.Range(0.5f, 2.5f);
             z = Random.Range(-1f, 1f);
-            target = new Vector3(x, y, z);
+            target = new Vector3(startPos.x + x, startPos.y + y, startPos.z + z);
         }
 
     }
