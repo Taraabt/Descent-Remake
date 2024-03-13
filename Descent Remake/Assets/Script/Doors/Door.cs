@@ -16,6 +16,9 @@ public class Door : MonoBehaviour
     {
         OnDoorOpen();
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        OnDoorOpen();
+    }
 
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 10
   lerpDuration: 3
-  needsKey: 0
+  needsKey: 1
 --- !u!65 &6265435430139279490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15
+  m_VersionIndex: 18
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -724,6 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 7280144173085182025}
   dirPos: {x: -1, y: 0, z: 0}
+  player: {fileID: 0}
 --- !u!1 &5073772959317663187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1217,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15
+  m_VersionIndex: 18
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1307,6 +1308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 7280144173085182025}
   dirPos: {x: 0, y: 1, z: 0}
+  player: {fileID: 0}
 --- !u!1 &6850581070619029915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1801,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15
+  m_VersionIndex: 18
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1890,6 +1892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 7280144173085182025}
   dirPos: {x: 1, y: 0, z: 0}
+  player: {fileID: 0}
 --- !u!1 &7703380014178545558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,7 +2385,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15
+  m_VersionIndex: 18
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2473,6 +2476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 7280144173085182025}
   dirPos: {x: 0, y: -1, z: 0}
+  player: {fileID: 0}
 --- !u!1 &7953076575689335830
 GameObject:
   m_ObjectHideFlags: 0

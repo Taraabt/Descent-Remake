@@ -14,6 +14,7 @@ public class MoveDoor : MonoBehaviour
     float time = 0;
     float duration =0;
     float lerpDur=0;
+    [SerializeField]PlayerMovement player;
 
 
     private void OnEnable()
@@ -71,6 +72,7 @@ public class MoveDoor : MonoBehaviour
     }
     private void Start()
     {
+        player.GetComponent<PlayerMovement>();
         lerpDur=door.lerpDuration;
         isOpen = false;
         time=0;
@@ -126,8 +128,10 @@ public class MoveDoor : MonoBehaviour
     }
     public void MoveWithKey()
     {
-        //if playerhaskey
-        //StartCoroutine(MoveObj());
+        if (player.hasKey == true)
+        {
+            canOpen = true;
+        }
     }
 
 
