@@ -32,7 +32,10 @@ public class Gun : ScriptableObject
 
     public void SpawnPojectile(MagType ammoType, Transform spawnPoint)
     {
-        MonoBehaviour.Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
+        Transform bullet;
+        bullet=MonoBehaviour.Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
+        BulletDamage bltDmg=bullet.GetComponent<BulletDamage>();
+        bltDmg.damage = dmg;
     }
 
     public void HitScanRay(Transform spawnPoint)

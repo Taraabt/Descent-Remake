@@ -21,7 +21,7 @@ public class UI : MonoBehaviour
     private void Update()
     {
         Debug.Log(text.text);
-        int ammo1 = (int)Mathf.Round(player.mag1.ammo);
+        int ammo1 = (int)Mathf.Round(player.mag1.ammo.ammo);
         text.text= "Ammo: " +ammo1.ToString();
 
 
