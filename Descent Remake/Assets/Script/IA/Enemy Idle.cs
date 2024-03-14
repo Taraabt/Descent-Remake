@@ -8,18 +8,18 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class EnemyIdle : MonoBehaviour{
 
 
-    [SerializeField] RoomEntry entry;
-    [SerializeField] RoomExit exit;
-    Rigidbody rb;
+    public RoomEntry entry;
+    public RoomExit exit;
+    public Rigidbody rb;
 
-    bool hasObstacle;
-    [SerializeField] float enemySpeed;
-    float targetDistance;
+    public bool hasObstacle;
+    public float enemySpeed;
+    public float targetDistance;
 
-    Vector3 startPos;
-    private Vector3 target;
-    float x, y, z;
-    RaycastHit hit;
+    public Vector3 startPos;
+    public Vector3 target;
+    public float x, y, z;
+    public RaycastHit hit;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class EnemyIdle : MonoBehaviour{
         x = Random.Range(-4.5f, 4.5f);
         y = Random.Range(0.5f, 2.5f);
         z = Random.Range(-1f, 1f);
-        target = new Vector3(x, y, z);
+        target = new Vector3(startPos.x + x, startPos.y + y, startPos.z + z);
     }
 
     void Update(){
@@ -45,7 +45,7 @@ public class EnemyIdle : MonoBehaviour{
             x = Random.Range(-4.5f, 4.5f);
             y = Random.Range(0.5f, 2.5f);
             z = Random.Range(-1f, 1f);
-            target = new Vector3(x, y, z);
+            target = new Vector3(startPos.x + x, startPos.y + y, startPos.z + z);
         }
 
     }

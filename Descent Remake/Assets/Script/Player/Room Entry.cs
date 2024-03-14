@@ -9,6 +9,9 @@ public class RoomEntry : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.GetComponent<PlayerMovement>() == null)
+            return;
+
         OnRoomEntry();
     }
 

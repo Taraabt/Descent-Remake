@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[System.Serializable]
-public class MagType 
+[CreateAssetMenu]
+public class MagType : ScriptableObject
 {
     public Transform mags;
     public Transform bullet;
-    public float ammo;
+    public Ammo ammo;
 }

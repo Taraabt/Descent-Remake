@@ -2,52 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Gun
+[CreateAssetMenu]
+public class Gun : ScriptableObject
 {
     public float ammoPerShot;
     public float ReloadTime = 1;
     public float MaxHitScanLenght = 1;
     public float dmg = 1;
 
-    public Transform spawnPoint;
+
     public bool isProjectile;
 
-    public void Shoot(MagType ammoType)
+    public void Shoot(MagType ammoType, Transform spawnPoint)
     {
-        if (ammoType.ammo >= ammoPerShot)
+        if (ammoType.ammo.ammo >= ammoPerShot)
         {
-            ammoType.ammo -= ammoPerShot;
+            ammoType.ammo.ammo -= ammoPerShot;
 
             if (isProjectile)
             {
-                SpawnPojectile(ammoType);
+                SpawnPojectile(ammoType, spawnPoint);
             }
             else
             {
-                HitScanRay();
+                HitScanRay(spawnPoint);
             }
         }
     }
 
-    public void SpawnPojectile(MagType ammoType)
+    public void SpawnPojectile(MagType ammoType, Transform spawnPoint)
     {
         MonoBehaviour.Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
     }
 
-    public void HitScanRay()
+    public void HitScanRay(Transform spawnPoint)
     {
         Ray ray = new Ray(spawnPoint.position, Vector3.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, MaxHitScanLenght))
+        if (Physics.Raycast(ray, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
         {
-            //check if it has hit an enemy then
-            // if (hit.transform.getcomponent<enemyScript>())
-            // {
-            //      dmg the enemy
-            //      enemyHp -= tot;
-            // }
+            //enemyHp enemy = hit.transform.GetComponent<EnemyHp>();
+
+            //enemy.hp -= dmg;
         }
     }
 

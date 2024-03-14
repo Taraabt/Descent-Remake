@@ -16,4 +16,9 @@ public class ProjectileMove : MonoBehaviour
 
         transform.position = pos;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject,1);
+    }
 }
