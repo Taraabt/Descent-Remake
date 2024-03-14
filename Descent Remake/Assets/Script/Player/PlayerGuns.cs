@@ -11,8 +11,8 @@ public class PlayerGuns : MonoBehaviour
     public List<Holster> primary;
     public List<Holster> secondary;
 
-    Gun gun1, gun2;
-    MagType mag1, mag2;
+    public Gun gun1, gun2;
+    public MagType mag1, mag2;
 
     [SerializeField] Transform gunTransform;
 

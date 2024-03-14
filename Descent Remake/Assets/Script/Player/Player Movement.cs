@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour 
 {
 
     float zMove;
@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     float oldX;
     float oldY;
+    public bool hasKey=false;
 
 
     [SerializeField] float rotationSpeed;

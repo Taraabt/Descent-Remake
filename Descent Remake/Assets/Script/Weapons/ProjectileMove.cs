@@ -6,6 +6,7 @@ public class ProjectileMove : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] Transform player;
+
     void Update()
     {
         Vector3 pos = transform.position;
