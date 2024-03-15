@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletDamage : MonoBehaviour
+public class BulletDamage : Damage
 {
-    [HideInInspector]public float damage;
+    [SerializeField] PlayerGuns player;
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerGuns>();
+        damage = player.gun1.dmg;
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }

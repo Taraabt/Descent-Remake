@@ -4,12 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : Hp
 {
     public List<Vector3> positions;
     public List<Vector3> returnPositions;
     public Vector3 target;
     public Vector3 direction;
+
+    public float contactDmg = 2;
 
     public List<Vector3> rayCastDirs;
 
@@ -39,9 +41,7 @@ public class EnemyAI : MonoBehaviour
 
 
     [HideInInspector] public float distToPositons;
-    [HideInInspector] public float timer;
     [HideInInspector] public float timerTillUnstuck;
-
     [HideInInspector] public bool isFirstLostCheckDone;
 
 
@@ -55,7 +55,6 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-
         startPos = transform.position;
         positions = new();
         returnPositions = new();
@@ -66,6 +65,11 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (hp <= 0)
+        {
+            Death();
+        }
+
         state.OnUpdate(this);
     }
 
@@ -79,10 +83,34 @@ public class EnemyAI : MonoBehaviour
         state.OnStay(this);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 9)
+            hp -= collision.transform.GetComponent<BulletDamage>().damage;
+    }
+
+
+    // THIS IS WHERE THE FUNCTIONS START:
+
+    public override void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (Application.isPlaying == false)
+            return;
+        // activate particle system NOW
+    }
+
     public void StartIdle()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
+
+
 
     public void UnStuck(List<Vector3> givenPosis)
     {
@@ -91,7 +119,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 newPos = Vector3.zero;
         if (timerTillUnstuck > durationForUnstucking)
         {
-            
+
             foreach (Vector3 dir in rayCastDirs)
             {
                 Physics.Raycast(transform.position, dir, out hitted);

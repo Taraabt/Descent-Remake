@@ -32,22 +32,25 @@ public class Gun : ScriptableObject
 
     public void SpawnPojectile(MagType ammoType, Transform spawnPoint)
     {
-        Transform bullet;
-        bullet=MonoBehaviour.Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
-        BulletDamage bltDmg=bullet.GetComponent<BulletDamage>();
-        bltDmg.damage = dmg;
+        Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
     }
 
     public void HitScanRay(Transform spawnPoint)
     {
-        Ray ray = new Ray(spawnPoint.position, Vector3.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
+        if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
         {
-            //enemyHp enemy = hit.transform.GetComponent<EnemyHp>();
-
-            //enemy.hp -= dmg;
+            Debug.Log("i hit this", hit.transform);
+            Hp hpClass = hit.transform.GetComponent<Hp>();
+            Debug.Log(hpClass.transform, hpClass.gameObject);
+            Debug.Log(dmg);
+            Debug.Log(hpClass.hp);
+            hpClass.hp -= dmg;
+            if (hpClass.hp <= 0) 
+            { 
+                hpClass.Death();
+            }
         }
     }
 

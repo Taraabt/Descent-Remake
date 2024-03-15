@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ee2f22acabc9048a21857cba9b27a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
   positions: []
   returnPositions: []
   target: {x: 0, y: 0, z: 0}
@@ -192,7 +193,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
   startPos: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
+  player: {fileID: 1967972323279671551, guid: 69f52d386014d7440bd06075c94a68e9, type: 3}
   Mycollider: {fileID: 7324960951893959425}
   rb: {fileID: 7419205410474378971}
   maxDistChase: 30
@@ -204,7 +205,6 @@ MonoBehaviour:
   maxRayDistance: 2
   idleRange: 4
   distToPositons: 0
-  timer: 0
   timerTillUnstuck: 0
   isFirstLostCheckDone: 0
 --- !u!65 &7314981391575353419

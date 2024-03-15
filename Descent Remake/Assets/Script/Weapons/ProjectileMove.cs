@@ -5,21 +5,15 @@ using UnityEngine;
 public class ProjectileMove : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] Transform player;
 
     void Update()
     {
         Vector3 pos = transform.position;
 
-        pos += transform.forward* speed*Time.deltaTime;
+        pos += transform.forward * speed * Time.deltaTime;
 
         //pos.z += speed * Time.deltaTime;
 
         transform.position = pos;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(gameObject,1);
     }
 }

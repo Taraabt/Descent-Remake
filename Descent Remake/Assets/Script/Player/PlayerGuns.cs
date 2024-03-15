@@ -21,6 +21,11 @@ public class PlayerGuns : MonoBehaviour
         reloadedSecondary = true;
 
 
+    private void Start()
+    {
+        CollisionChecker.onDeath += Death;
+    }
+
     void Update()
     {
         float changeWeapon = 0;
@@ -86,6 +91,12 @@ public class PlayerGuns : MonoBehaviour
             reloadedSecondary = true;
     }
 
+
+    void Death()
+    {
+        CollisionChecker.onDeath -= Death;
+        this.enabled = false;
+    }
 
     bool isopen = false;
 

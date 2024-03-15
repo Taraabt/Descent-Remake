@@ -3,34 +3,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionChecker : MonoBehaviour
+public class CollisionChecker : Hp
 {
-    GameObject player;
 
-    private void Start()
-    {
-        player = gameObject;
-
-    }
+    public delegate void Dead();
+    static public event Dead onDeath;
 
     private void OnTriggerEnter(Collider other)
     {
-        AmmoBoxCheck(other);
-        HpUpCheck(other);
-        GunPickUpCheck(other);
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        AmmoBoxCheck(collision);
+        HpUpCheck(collision);
+        GunPickUpCheck(collision);
+        DamageCheck(collision);
     }
 
-    void AmmoBoxCheck(Collider other)
+    void DamageCheck(Collision other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            hp -= other.transform.GetComponent<BulletDamage>().damage;
+            if(hp < 0)
+            {
+                Death();
+            }
+        }
+    }
+
+    public override void Death()
+    {
+        onDeath.Invoke();
+        // do the death
+    }
+
+    void AmmoBoxCheck(Collision other)
     {
         if (other.gameObject.layer == 10)// is a Magbox
         {
-            List<Holster> primary = player.GetComponent<PlayerGuns>().primary;
-            List<Holster> secondary = player.GetComponent<PlayerGuns>().secondary;
+            List<Holster> primary = gameObject.GetComponent<PlayerGuns>().primary;
+            List<Holster> secondary = gameObject.GetComponent<PlayerGuns>().secondary;
 
             List<Holster> allGuns = new();
 
@@ -52,12 +67,12 @@ public class CollisionChecker : MonoBehaviour
     }
 
 
-    void GunPickUpCheck(Collider other)
+    void GunPickUpCheck(Collision other)
     {
         if (other.gameObject.layer == 11)// is a Magbox
         {
-            List<Holster> primary = player.GetComponent<PlayerGuns>().primary;
-            List<Holster> secondary = player.GetComponent<PlayerGuns>().secondary;
+            List<Holster> primary = gameObject.GetComponent<PlayerGuns>().primary;
+            List<Holster> secondary = gameObject.GetComponent<PlayerGuns>().secondary;
 
             List<Holster> allGuns = new();
 
@@ -83,22 +98,22 @@ public class CollisionChecker : MonoBehaviour
             {
                 if (otherGun.isPrimary)
                 {
-                    player.GetComponent<PlayerGuns>().primary.Add(otherGun);
+                    gameObject.GetComponent<PlayerGuns>().primary.Add(otherGun);
                 }
                 else
                 {
-                    player.GetComponent<PlayerGuns>().secondary.Add(otherGun);
+                    gameObject.GetComponent<PlayerGuns>().secondary.Add(otherGun);
                 }
             }
 
             Destroy(other.gameObject);
         }
     }
-    void HpUpCheck(Collider other)
+    void HpUpCheck(Collision other)
     {
         if (other.gameObject.layer == 12) // first aid kit
         {
-            // player.getcomponent<HpSystem>();
+            // gameObject.getcomponent<HpSystem>();
         }
     }
 }

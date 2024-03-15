@@ -2,23 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OstageDoor : MonoBehaviour , IDamageable
+public class OstageDoor : Hp
 {
-    [SerializeField]float hp;
 
-    public void OnCollisionEnter(Collision collision)
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log("hello", collision.gameObject);
+    //    BulletDamage x = collision.gameObject.GetComponent<BulletDamage>();
+    //    hp -= x.damage;
+
+    //    //particellare danno sulla porta
+
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        hp-=collision.gameObject.GetComponent<BulletDamage>().damage;
-        //particellare danno sulla porta
+        BulletDamage x = other.gameObject.GetComponent<BulletDamage>();
+        hp -= x.damage;
 
-    }
-
-    void Update()
-    {
-        if (hp < 0)
+        if (hp <= 0)
         {
-            //cambia mesh porta e aggiungi particellare
-            Destroy(gameObject);
+            Death();
         }
-}
     }
+
+    public override void Death()
+    {
+        // do the particles 
+        base.Death();
+        //Destroy(gameObject);
+    }
+}
