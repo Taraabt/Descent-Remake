@@ -7,12 +7,12 @@ public class UI : MonoBehaviour
 {
 
     [SerializeField] PlayerGuns player;
-    TMP_Text text;
+    TMP_Text ammo;
 
 
     private void Start()
     {
-        text =this.GetComponentInChildren<TMP_Text>(); 
+        ammo =this.GetComponentInChildren<TMP_Text>(); 
     }
 
 
@@ -20,9 +20,9 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(text.text);
+        Debug.Log(ammo.text);
         int ammo1 = (int)Mathf.Round(player.mag1.ammo.ammo);
-        text.text= "Ammo: " +ammo1.ToString();
+        ammo.text= "Ammo: " +ammo1.ToString();
 
 
     }
