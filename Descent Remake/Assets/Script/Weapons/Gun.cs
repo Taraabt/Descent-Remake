@@ -11,6 +11,7 @@ public class Gun : ScriptableObject
     public float dmg = 1;
 
 
+
     public bool isProjectile;
 
     public void Shoot(MagType ammoType, Transform spawnPoint)
@@ -30,6 +31,14 @@ public class Gun : ScriptableObject
         }
     }
 
+    public void EnemyShoot(MagType ammoType, Transform spawnPoint, Transform target)
+    {
+        Vector3 dir = target.position - spawnPoint.position;
+        Transform bulletTransform = Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
+        EnemyBullet bullet = bulletTransform.GetComponent<EnemyBullet>();
+        bullet.direction = dir;
+    }
+
     public void SpawnPojectile(MagType ammoType, Transform spawnPoint)
     {
         Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
@@ -38,7 +47,6 @@ public class Gun : ScriptableObject
     public void HitScanRay(Transform spawnPoint)
     {
         RaycastHit hit;
-
         if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
         {
             Debug.Log("i hit this", hit.transform);
@@ -47,8 +55,9 @@ public class Gun : ScriptableObject
             Debug.Log(dmg);
             Debug.Log(hpClass.hp);
             hpClass.hp -= dmg;
-            if (hpClass.hp <= 0) 
-            { 
+
+            if (hpClass.hp <= 0)
+            {
                 hpClass.Death();
             }
         }

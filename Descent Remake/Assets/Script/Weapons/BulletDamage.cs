@@ -5,14 +5,19 @@ using UnityEngine;
 public class BulletDamage : Damage
 {
     [SerializeField] PlayerGuns player;
+
+    public delegate void imDead(int number);
+    public event imDead OnDead;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerGuns>();
         damage = player.gun1.dmg;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        OnDead.Invoke(1);
+        Destroy(gameObject,2);
     }
 }

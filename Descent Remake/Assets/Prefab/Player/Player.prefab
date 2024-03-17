@@ -246,6 +246,10 @@ MonoBehaviour:
     gun: {fileID: 11400000, guid: 1a1fa48620d62184ca239b181c6ece4d, type: 2}
     magType: {fileID: 11400000, guid: 6a6bb4de942386841a3fd6baac4b6dbf, type: 2}
     isPrimary: 1
+  - IsEnemy: 0
+    gun: {fileID: 11400000, guid: 46bb86daa8ea6594281d7582b6029adc, type: 2}
+    magType: {fileID: 11400000, guid: 139c162f9a88d4240b9cbc317881f640, type: 2}
+    isPrimary: 1
   secondary:
   - IsEnemy: 0
     gun: {fileID: 11400000, guid: d4b1c4ef5a7105c4f9ea2d381b76dd37, type: 2}

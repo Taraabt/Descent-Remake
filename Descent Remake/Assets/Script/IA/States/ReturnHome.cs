@@ -37,8 +37,8 @@ public class ReturnHome : BaseEnemyStates
 
         if (enemy.hit.transform == enemy.player)
         {
-            enemy.positions.Clear();
-            enemy.positions.Add(enemy.player.position);
+            enemy.playerPositions.Clear();
+            enemy.playerPositions.Add(enemy.player.position);
             enemy.distToPositons = enemy.gapToPlayer;
 
             enemy.OnChangeState(new Chase());

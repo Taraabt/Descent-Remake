@@ -6,14 +6,26 @@ using UnityEngine;
 
 public class EnemyAI : Hp
 {
-    public List<Vector3> positions;
-    public List<Vector3> returnPositions;
-    public Vector3 target;
-    public Vector3 direction;
+
+    [Header("If it gets stuck")]
+    public List<Vector3> rayCastDirs;
+
+    [HideInInspector] public List<Vector3> playerPositions;
+    [HideInInspector] public List<Vector3> returnPositions;
+    [HideInInspector] public Vector3 target;
+
+    [HideInInspector] public Vector3 direction;
+
+    [Header("Shooting: ")]
+    public Holster enemyGun;
+
+
+    [Header("Circle Player: ")]
+    public float MoveWaitTime;
+    public float radius;
 
     public float contactDmg = 2;
 
-    public List<Vector3> rayCastDirs;
 
     public BaseEnemyStates state;
 
@@ -44,6 +56,9 @@ public class EnemyAI : Hp
     [HideInInspector] public float timerTillUnstuck;
     [HideInInspector] public bool isFirstLostCheckDone;
 
+    [HideInInspector] public float reloadTimer;
+    [HideInInspector] public float movingTimer;
+
 
 
     public void OnChangeState(BaseEnemyStates newState)
@@ -56,7 +71,7 @@ public class EnemyAI : Hp
     private void Start()
     {
         startPos = transform.position;
-        positions = new();
+        playerPositions = new();
         returnPositions = new();
         distToPositons = startDis;
         state = new Idle();
@@ -80,14 +95,22 @@ public class EnemyAI : Hp
 
     private void OnTriggerStay(Collider other)
     {
+        player = other.transform;
         state.OnStay(this);
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 9)
+        if (collision.gameObject.layer == (1 << 9 | 1 << 16))
+        {
             hp -= collision.transform.GetComponent<BulletDamage>().damage;
+            if (hp <= 0)
+            {
+                Death();
+            }
+        }
+
     }
 
 
@@ -105,12 +128,29 @@ public class EnemyAI : Hp
         // activate particle system NOW
     }
 
+    #region CirclePlayer
+    public void CirclePlayer(Vector3 newPos)
+    {
+        StartCoroutine(StartCircleing(this, newPos));
+    }
+
+    IEnumerator StartCircleing(EnemyAI enemy, Vector3 newPos)
+    {
+        Vector3 dir = newPos - enemy.transform.position;
+
+        while (Vector3.Distance(enemy.transform.position, newPos) > 0.1f)
+        {
+            enemy.transform.position += dir * (enemy.speed * Time.deltaTime);
+            yield return null;
+        }
+        enemy.movingTimer = 0;
+    }
+    #endregion
+
     public void StartIdle()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
-
-
 
     public void UnStuck(List<Vector3> givenPosis)
     {
@@ -146,7 +186,7 @@ public class EnemyAI : Hp
     {
         timerTillUnstuck = 0;
         isFirstLostCheckDone = false;
-        positions.Clear();
+        playerPositions.Clear();
     }
 
 
@@ -158,7 +198,7 @@ public class EnemyAI : Hp
             returnPositions.Insert(0, transform.position);
         }
 
-        UnStuck(positions);
+        UnStuck(playerPositions);
 
 
         dir = player.position - transform.position;
@@ -166,20 +206,30 @@ public class EnemyAI : Hp
 
         if (hit.transform != player)
         {
-            if (Vector3.Distance(positions[positions.Count - 1], player.position) > startDis)
+            if (Vector3.Distance(playerPositions[playerPositions.Count - 1], player.position) > startDis)
             {
-                positions.Add(player.position);
+                playerPositions.Add(player.position);
             }
             distToPositons = startDis;
         }
 
-        if (positions.Count > 0)
+        if (playerPositions.Count > 0)
         {
-            if (Vector3.Distance(transform.position, positions[0]) < distToPositons)
+            if (Vector3.Distance(transform.position, playerPositions[0]) < distToPositons)
             {
-                positions.RemoveAt(0);
+                playerPositions.RemoveAt(0);
+            }
+            else
+            {
+                dir = playerPositions[0] - transform.position;
+                transform.position += dir.normalized * (speed * Time.deltaTime);
             }
 
+        }
+
+        if (Vector3.Distance(transform.position, player.position) < distToPositons)
+        {
+            OnChangeState(new Shooting());
         }
     }
 
@@ -232,14 +282,14 @@ public class EnemyAI : Hp
 
             Gizmos.color = Color.green;
 
-            if (positions.Count > 0)
+            if (playerPositions.Count > 0)
             {
-                Gizmos.DrawSphere(positions[0], 0.5f);
+                Gizmos.DrawSphere(playerPositions[0], 0.5f);
 
 
-                for (int i = 1; i < positions.Count; i++)
+                for (int i = 1; i < playerPositions.Count; i++)
                 {
-                    Vector3 x = positions[i];
+                    Vector3 x = playerPositions[i];
                     Gizmos.color += Color.red;
                     Gizmos.DrawSphere(x, 0.5f);
                 }
