@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionChecker : Hp
+public class PlayerHp : Hp
 {
     [SerializeField] Rigidbody rb;
 

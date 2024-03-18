@@ -25,7 +25,7 @@ public class PlayerGuns : MonoBehaviour
 
     private void Start()
     {
-        CollisionChecker.OnDeath += Death;
+        PlayerHp.OnDeath += Death;
     }
 
     void Update()
@@ -96,7 +96,7 @@ public class PlayerGuns : MonoBehaviour
 
     void Death()
     {
-        CollisionChecker.OnDeath -= Death;
+        PlayerHp.OnDeath -= Death;
         this.enabled = false;
     }
 

@@ -911,6 +911,7 @@ GameObject:
   - component: {fileID: 5534779329127170041}
   - component: {fileID: 8507642767834280377}
   - component: {fileID: 3149558622817430297}
+  - component: {fileID: 3141399378513971204}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -930,11 +931,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3141732328985296315}
+  - {fileID: 5698400220101155126}
+  - {fileID: 1201399460727724327}
   - {fileID: 8379494044993394972}
   - {fileID: 1794642881725660059}
-  - {fileID: 3141732328985296315}
-  - {fileID: 1201399460727724327}
-  - {fileID: 5698400220101155126}
   m_Father: {fileID: 5555360120213116923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -980,6 +981,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3141399378513971204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4376521588288709244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a26c40f5f742ff489a8d8592b865dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &4929590697727001805
 GameObject:
   m_ObjectHideFlags: 0
