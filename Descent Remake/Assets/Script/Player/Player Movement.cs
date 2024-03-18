@@ -17,9 +17,11 @@ public class PlayerMovement : MonoBehaviour
     public bool hasKey=false;
 
 
+    [SerializeField] GameObject[] ui;
     [SerializeField] float rotationSpeed;
     [SerializeField] float mouseSensitivity;
     [SerializeField] float speed;
+
 
     void Start()
     {
@@ -55,6 +57,29 @@ public class PlayerMovement : MonoBehaviour
 
         oldX = x;
         oldY = y;
+
+
+        float rearInput=Input.GetAxisRaw("Rear");
+        if (Input.GetButtonDown("Rear"))
+        {
+            if(rearInput > 0)
+            {
+                ui[0].SetActive(false);
+                ui[2].SetActive(true);
+            }
+            else if(rearInput <0)
+            {
+                ui[0].SetActive(false);
+                ui[1].SetActive(true);
+            }
+        }else if (Input.GetButtonUp("Rear"))
+        {
+            ui[1].SetActive(false);
+            ui[2].SetActive(false);
+            ui[0].SetActive(true);
+        }
+
+
     }
 
     private void FixedUpdate()
