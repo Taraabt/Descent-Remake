@@ -39,7 +39,7 @@ public class ReturnHome : BaseEnemyStates
         {
             enemy.playerPositions.Clear();
             enemy.playerPositions.Add(enemy.player.position);
-            enemy.distToPositons = enemy.gapToPlayer;
+            enemy.distToPositons = enemy.attackRange;
 
             enemy.OnChangeState(new Chase());
 

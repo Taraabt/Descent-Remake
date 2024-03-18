@@ -2196,6 +2196,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 263316180}
+    - target: {fileID: 9195532596712592539, guid: 0e7684cb09426df429ce5dea518792d5,
+        type: 3}
+      propertyPath: attackRange
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195532596712592539, guid: 0e7684cb09426df429ce5dea518792d5,
+        type: 3}
+      propertyPath: MoveWaitTime
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

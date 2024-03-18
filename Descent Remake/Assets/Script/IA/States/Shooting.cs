@@ -29,7 +29,7 @@ public class Shooting : BaseEnemyStates
 
     public override void OnUpdate(EnemyAI enemy)
     {
-        if (Vector3.Distance(enemy.transform.position, enemy.player.position) > enemy.radius)
+        if (Vector3.Distance(enemy.transform.position, enemy.player.position) > enemy.radius+2)
         {
             OnExit(enemy);
         }

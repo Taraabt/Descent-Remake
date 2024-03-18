@@ -24,7 +24,7 @@ public class CollisionChecker : Hp
 
     void DamageCheck(Collision other)
     {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.layer == 9)
         {
             hp -= other.transform.GetComponent<BulletDamage>().damage;
             if(hp < 0)

@@ -8,6 +8,7 @@ public class Chase : BaseEnemyStates
     public override void OnEnter(EnemyAI enemy)
     {
         enemy.returnPositions.Insert(0, enemy.transform.position);
+        enemy.playerPositions.Insert(0, enemy.player.position);
     }
 
     public override void OnExit(EnemyAI enemy)
@@ -47,7 +48,7 @@ public class Chase : BaseEnemyStates
         {
             enemy.playerPositions.Clear();
             enemy.playerPositions.Add(enemy.player.position);
-            enemy.distToPositons = enemy.gapToPlayer;
+            enemy.distToPositons = enemy.attackRange;
         }
         
     }

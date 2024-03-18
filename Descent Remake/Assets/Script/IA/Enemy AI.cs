@@ -40,7 +40,7 @@ public class EnemyAI : Hp
 
     public float maxDistChase;
     public float speed;
-    public float gapToPlayer;
+    public float attackRange;
 
     public Vector3 dir;
 
@@ -51,13 +51,13 @@ public class EnemyAI : Hp
     public float idleRange = 1;
 
 
+    [SerializeReference] public float timerTillUnstuck;
+    [SerializeReference] public float reloadTimer;
+    [SerializeReference] public float movingTimer;
 
     [HideInInspector] public float distToPositons;
-    [HideInInspector] public float timerTillUnstuck;
     [HideInInspector] public bool isFirstLostCheckDone;
 
-    [HideInInspector] public float reloadTimer;
-    [HideInInspector] public float movingTimer;
 
 
 
@@ -102,9 +102,9 @@ public class EnemyAI : Hp
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == (1 << 9 | 1 << 16))
+        if (collision.gameObject.layer == (9 | 16))
         {
-            hp -= collision.transform.GetComponent<BulletDamage>().damage;
+            hp -= collision.transform.GetComponent<Damage>().damage;
             if (hp <= 0)
             {
                 Death();
@@ -131,19 +131,19 @@ public class EnemyAI : Hp
     #region CirclePlayer
     public void CirclePlayer(Vector3 newPos)
     {
-        StartCoroutine(StartCircleing(this, newPos));
+        StartCoroutine(StartCircleing(newPos));
     }
 
-    IEnumerator StartCircleing(EnemyAI enemy, Vector3 newPos)
+    IEnumerator StartCircleing(Vector3 newPos)
     {
-        Vector3 dir = newPos - enemy.transform.position;
+        dir = newPos - transform.position;
 
-        while (Vector3.Distance(enemy.transform.position, newPos) > 0.1f)
+        while (Vector3.Distance(transform.position, newPos) > 0.1f)
         {
-            enemy.transform.position += dir * (enemy.speed * Time.deltaTime);
+            rb.velocity = dir.normalized * (speed * Time.fixedDeltaTime);
             yield return null;
         }
-        enemy.movingTimer = 0;
+        movingTimer = 0;
     }
     #endregion
 
@@ -159,7 +159,6 @@ public class EnemyAI : Hp
         Vector3 newPos = Vector3.zero;
         if (timerTillUnstuck > durationForUnstucking)
         {
-
             foreach (Vector3 dir in rayCastDirs)
             {
                 Physics.Raycast(transform.position, dir, out hitted);
@@ -215,19 +214,19 @@ public class EnemyAI : Hp
 
         if (playerPositions.Count > 0)
         {
-            if (Vector3.Distance(transform.position, playerPositions[0]) < distToPositons)
+            if (Vector3.Distance(transform.position, playerPositions[0]) <= distToPositons)
             {
                 playerPositions.RemoveAt(0);
             }
-            else
-            {
-                dir = playerPositions[0] - transform.position;
-                transform.position += dir.normalized * (speed * Time.deltaTime);
-            }
+            //else
+            //{
+            //    dir = playerPositions[0] - transform.position;
+            //    transform.position += dir.normalized * (speed * Time.deltaTime);
+            //}
 
         }
 
-        if (Vector3.Distance(transform.position, player.position) < distToPositons)
+        if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
             OnChangeState(new Shooting());
         }
@@ -260,6 +259,12 @@ public class EnemyAI : Hp
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, dir);
 
+
+        if (attackRange != 0)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
 
         Gizmos.color = Color.cyan;
         if (target != null)
