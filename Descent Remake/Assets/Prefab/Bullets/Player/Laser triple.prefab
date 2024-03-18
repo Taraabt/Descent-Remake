@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6216604623322067488}
   - component: {fileID: -5848663734765329968}
-  - component: {fileID: 6484269634031431739}
   m_Layer: 0
-  m_Name: Laser DubleBullet
+  m_Name: Laser triple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6820040305436726197}
+  - {fileID: 5331124164256788109}
   - {fileID: 1218888007832536629}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,34 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  player: {fileID: 0}
---- !u!54 &6484269634031431739
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851720854069238958}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &2215960325602991511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,6 +121,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
     type: 3}
   m_PrefabInstance: {fileID: 2215960325602991511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5174923138130883887
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6216604623322067488}
+    m_Modifications:
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401831998058352018, guid: 0d46bf224a248bf41a9d69174d6a0062,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserBullet (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0d46bf224a248bf41a9d69174d6a0062, type: 3}
+--- !u!4 &5331124164256788109 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1020892163581107106, guid: 0d46bf224a248bf41a9d69174d6a0062,
+    type: 3}
+  m_PrefabInstance: {fileID: 5174923138130883887}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5804953576138360855
 PrefabInstance:

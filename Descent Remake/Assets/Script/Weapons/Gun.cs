@@ -11,6 +11,7 @@ public class Gun : ScriptableObject
     public float dmg = 1;
 
 
+
     public bool isProjectile;
 
     public void Shoot(MagType ammoType, Transform spawnPoint)
@@ -30,24 +31,37 @@ public class Gun : ScriptableObject
         }
     }
 
+    public void EnemyShoot(MagType ammoType, Transform spawnPoint, Transform target)
+    {
+        Vector3 dir = target.position - spawnPoint.position;
+        Transform bulletTransform = Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
+        EnemyBullet bullet = bulletTransform.GetComponent<EnemyBullet>();
+        bullet.direction = dir;
+    }
+
     public void SpawnPojectile(MagType ammoType, Transform spawnPoint)
     {
-        Transform bullet;
-        bullet=MonoBehaviour.Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
-        BulletDamage bltDmg=bullet.GetComponent<BulletDamage>();
-        bltDmg.damage = dmg;
+        Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
     }
 
     public void HitScanRay(Transform spawnPoint)
     {
-        Ray ray = new Ray(spawnPoint.position, Vector3.forward);
         RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
+        if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
         {
-            //enemyHp enemy = hit.transform.GetComponent<EnemyHp>();
+            Debug.Log("i hit this", hit.transform);
 
-            //enemy.hp -= dmg;
+            if (hit.transform.TryGetComponent<Hp>(out Hp hpClass))
+            {
+                hpClass.hp -= dmg;
+
+                if (hpClass.hp <= 0)
+                {
+                    hpClass.Death();
+                }
+            }
+
+
         }
     }
 

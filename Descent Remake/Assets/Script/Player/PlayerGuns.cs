@@ -8,6 +8,8 @@ public class PlayerGuns : MonoBehaviour
     int index1 = 0;
     int index2 = 0;
 
+    public float contactDmg;
+
     public List<Holster> primary;
     public List<Holster> secondary;
 
@@ -20,6 +22,11 @@ public class PlayerGuns : MonoBehaviour
         reloadedPrimary = true,
         reloadedSecondary = true;
 
+
+    private void Start()
+    {
+        CollisionChecker.OnDeath += Death;
+    }
 
     void Update()
     {
@@ -86,6 +93,12 @@ public class PlayerGuns : MonoBehaviour
             reloadedSecondary = true;
     }
 
+
+    void Death()
+    {
+        CollisionChecker.OnDeath -= Death;
+        this.enabled = false;
+    }
 
     bool isopen = false;
 

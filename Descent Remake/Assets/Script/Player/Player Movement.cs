@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour 
 {
-
     float zMove;
     float zRot, yRot, xRot;
     Rigidbody rb;
@@ -26,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
+        CollisionChecker.OnDeath += Death;
 
         rb = this.gameObject.GetComponent<Rigidbody>();
     }
@@ -61,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = transform.forward * speed * zMove;
         transform.Rotate(xyz);
+    }
+
+    void Death()
+    {
+        CollisionChecker.OnDeath -= Death;
+        this.enabled = false;
     }
 
 }

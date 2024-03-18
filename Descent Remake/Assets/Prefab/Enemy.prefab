@@ -160,7 +160,7 @@ SphereCollider:
     m_Bits: 65536
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 34295
+    m_Bits: 165879
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -180,10 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ee2f22acabc9048a21857cba9b27a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions: []
-  returnPositions: []
-  target: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0, z: 0}
+  hp: 10
   rayCastDirs:
   - {x: 1, y: 0, z: 0}
   - {x: -1, y: 0, z: 0}
@@ -191,22 +188,35 @@ MonoBehaviour:
   - {x: 0, y: -1, z: 0}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
+  playerPositions: []
+  returnPositions: []
+  target: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
+  enemyGun:
+    IsEnemy: 0
+    gun: {fileID: 11400000, guid: 4f30b2b7b75b0b04cad48c94b40304b6, type: 2}
+    magType: {fileID: 11400000, guid: 139c162f9a88d4240b9cbc317881f640, type: 2}
+    isPrimary: 1
+  MoveWaitTime: 3
+  radius: 3
+  contactDmg: 2
   startPos: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   Mycollider: {fileID: 7324960951893959425}
   rb: {fileID: 7419205410474378971}
   maxDistChase: 30
   speed: 100
-  gapToPlayer: 4
+  gapToPlayer: 2
   dir: {x: 0, y: 0, z: 0}
   startDis: 1
   durationForUnstucking: 5
   maxRayDistance: 2
   idleRange: 4
   distToPositons: 0
-  timer: 0
   timerTillUnstuck: 0
   isFirstLostCheckDone: 0
+  reloadTimer: 0
+  movingTimer: 0
 --- !u!65 &7314981391575353419
 BoxCollider:
   m_ObjectHideFlags: 0

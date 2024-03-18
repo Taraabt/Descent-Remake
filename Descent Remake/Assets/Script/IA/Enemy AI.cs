@@ -4,14 +4,28 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : Hp
 {
-    public List<Vector3> positions;
-    public List<Vector3> returnPositions;
-    public Vector3 target;
-    public Vector3 direction;
 
+    [Header("If it gets stuck")]
     public List<Vector3> rayCastDirs;
+
+    [HideInInspector] public List<Vector3> playerPositions;
+    [HideInInspector] public List<Vector3> returnPositions;
+    [HideInInspector] public Vector3 target;
+
+    [HideInInspector] public Vector3 direction;
+
+    [Header("Shooting: ")]
+    public Holster enemyGun;
+
+
+    [Header("Circle Player: ")]
+    public float MoveWaitTime;
+    public float radius;
+
+    public float contactDmg = 2;
+
 
     public BaseEnemyStates state;
 
@@ -26,7 +40,7 @@ public class EnemyAI : MonoBehaviour
 
     public float maxDistChase;
     public float speed;
-    public float gapToPlayer;
+    public float attackRange;
 
     public Vector3 dir;
 
@@ -37,12 +51,13 @@ public class EnemyAI : MonoBehaviour
     public float idleRange = 1;
 
 
+    [SerializeReference] public float timerTillUnstuck;
+    [SerializeReference] public float reloadTimer;
+    [SerializeReference] public float movingTimer;
 
     [HideInInspector] public float distToPositons;
-    [HideInInspector] public float timer;
-    [HideInInspector] public float timerTillUnstuck;
-
     [HideInInspector] public bool isFirstLostCheckDone;
+
 
 
 
@@ -55,9 +70,9 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-
         startPos = transform.position;
-        positions = new();
+        player = FindObjectOfType<PlayerMovement>().transform;
+        playerPositions = new();
         returnPositions = new();
         distToPositons = startDis;
         state = new Idle();
@@ -79,6 +94,55 @@ public class EnemyAI : MonoBehaviour
         state.OnStay(this);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 16)
+        {
+            Hp playerHp = player.GetComponent<Hp>();
+            playerHp.hp -= contactDmg;
+            if (playerHp.hp <= 0)
+            {
+                playerHp.Death();
+            }
+            hp -= player.GetComponent<PlayerGuns>().contactDmg;
+        }
+
+    }
+
+    // THIS IS WHERE THE FUNCTIONS START:
+
+    public override void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (Application.isPlaying == false)
+            return;
+        // activate particle system NOW
+    }
+
+    #region CirclePlayer
+    public void CirclePlayer(Vector3 newPos)
+    {
+        StartCoroutine(StartCircleing(newPos));
+    }
+
+    IEnumerator StartCircleing(Vector3 newPos)
+    {
+        dir = newPos - transform.position;
+
+        while (Vector3.Distance(transform.position, newPos) > 0.1f)
+        {
+            rb.velocity = dir.normalized * (speed * Time.fixedDeltaTime);
+            yield return null;
+        }
+        movingTimer = 0;
+    }
+    #endregion
+
     public void StartIdle()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -91,7 +155,6 @@ public class EnemyAI : MonoBehaviour
         Vector3 newPos = Vector3.zero;
         if (timerTillUnstuck > durationForUnstucking)
         {
-            
             foreach (Vector3 dir in rayCastDirs)
             {
                 Physics.Raycast(transform.position, dir, out hitted);
@@ -118,7 +181,7 @@ public class EnemyAI : MonoBehaviour
     {
         timerTillUnstuck = 0;
         isFirstLostCheckDone = false;
-        positions.Clear();
+        playerPositions.Clear();
     }
 
 
@@ -130,7 +193,7 @@ public class EnemyAI : MonoBehaviour
             returnPositions.Insert(0, transform.position);
         }
 
-        UnStuck(positions);
+        UnStuck(playerPositions);
 
 
         dir = player.position - transform.position;
@@ -138,20 +201,30 @@ public class EnemyAI : MonoBehaviour
 
         if (hit.transform != player)
         {
-            if (Vector3.Distance(positions[positions.Count - 1], player.position) > startDis)
+            if (Vector3.Distance(playerPositions[playerPositions.Count - 1], player.position) > startDis)
             {
-                positions.Add(player.position);
+                playerPositions.Add(player.position);
             }
             distToPositons = startDis;
         }
 
-        if (positions.Count > 0)
+        if (playerPositions.Count > 0)
         {
-            if (Vector3.Distance(transform.position, positions[0]) < distToPositons)
+            if (Vector3.Distance(transform.position, playerPositions[0]) <= distToPositons)
             {
-                positions.RemoveAt(0);
+                playerPositions.RemoveAt(0);
             }
+            //else
+            //{
+            //    dir = playerPositions[0] - transform.position;
+            //    transform.position += dir.normalized * (speed * Time.deltaTime);
+            //}
 
+        }
+
+        if (Vector3.Distance(transform.position, player.position) <= attackRange)
+        {
+            OnChangeState(new Shooting());
         }
     }
 
@@ -183,6 +256,12 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawRay(transform.position, dir);
 
 
+        if (attackRange != 0)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+
         Gizmos.color = Color.cyan;
         if (target != null)
         {
@@ -204,14 +283,14 @@ public class EnemyAI : MonoBehaviour
 
             Gizmos.color = Color.green;
 
-            if (positions.Count > 0)
+            if (playerPositions.Count > 0)
             {
-                Gizmos.DrawSphere(positions[0], 0.5f);
+                Gizmos.DrawSphere(playerPositions[0], 0.5f);
 
 
-                for (int i = 1; i < positions.Count; i++)
+                for (int i = 1; i < playerPositions.Count; i++)
                 {
-                    Vector3 x = positions[i];
+                    Vector3 x = playerPositions[i];
                     Gizmos.color += Color.red;
                     Gizmos.DrawSphere(x, 0.5f);
                 }

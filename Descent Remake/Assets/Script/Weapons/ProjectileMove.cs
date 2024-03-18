@@ -5,21 +5,45 @@ using UnityEngine;
 public class ProjectileMove : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] Transform player;
+    [SerializeField] BulletDamage[] bullets;
+    float totDied = 0;
+
+
+    private void Start()
+    {
+        bullets = GetComponentsInChildren<BulletDamage>();
+        foreach (var bullet in bullets)
+        {
+            bullet.OnDead += AllAreDead;
+        }
+    }
+
+    //private void OnEnable()
+    //{
+    //    foreach (var bullet in bullets)
+    //    {
+    //        bullet.OnDead += AllAreDead;
+    //    }
+    //}
 
     void Update()
     {
         Vector3 pos = transform.position;
 
-        pos += transform.forward* speed*Time.deltaTime;
+        pos += transform.forward * speed * Time.deltaTime;
 
         //pos.z += speed * Time.deltaTime;
 
         transform.position = pos;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void AllAreDead(int plus)
     {
-        Destroy(gameObject,1);
+        totDied+= plus;
+
+        if(totDied >= bullets.Length)
+        {
+            Destroy(gameObject);
+        }
     }
 }
