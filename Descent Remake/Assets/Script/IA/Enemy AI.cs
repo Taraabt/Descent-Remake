@@ -71,6 +71,7 @@ public class EnemyAI : Hp
     private void Start()
     {
         startPos = transform.position;
+        player = FindObjectOfType<PlayerMovement>().transform;
         playerPositions = new();
         returnPositions = new();
         distToPositons = startDis;
@@ -80,11 +81,6 @@ public class EnemyAI : Hp
 
     private void Update()
     {
-        if (hp <= 0)
-        {
-            Death();
-        }
-
         state.OnUpdate(this);
     }
 
@@ -95,24 +91,24 @@ public class EnemyAI : Hp
 
     private void OnTriggerStay(Collider other)
     {
-        player = other.transform;
         state.OnStay(this);
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == (9 | 16))
+        if (collision.gameObject.layer == 16)
         {
-            hp -= collision.transform.GetComponent<Damage>().damage;
-            if (hp <= 0)
+            Hp playerHp = player.GetComponent<Hp>();
+            playerHp.hp -= contactDmg;
+            if (playerHp.hp <= 0)
             {
-                Death();
+                playerHp.Death();
             }
+            hp -= player.GetComponent<PlayerGuns>().contactDmg;
         }
 
     }
-
 
     // THIS IS WHERE THE FUNCTIONS START:
 

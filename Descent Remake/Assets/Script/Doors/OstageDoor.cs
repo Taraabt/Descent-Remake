@@ -15,16 +15,16 @@ public class OstageDoor : Hp
 
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        BulletDamage x = other.gameObject.GetComponent<BulletDamage>();
-        hp -= x.damage;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    BulletDamage x = other.gameObject.GetComponent<BulletDamage>();
+    //    hp -= x.damage;
 
-        if (hp <= 0)
-        {
-            Death();
-        }
-    }
+    //    if (hp <= 0)
+    //    {
+    //        Death();
+    //    }
+    //}
 
     public override void Death()
     {

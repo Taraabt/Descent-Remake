@@ -8,6 +8,8 @@ public class PlayerGuns : MonoBehaviour
     int index1 = 0;
     int index2 = 0;
 
+    public float contactDmg;
+
     public List<Holster> primary;
     public List<Holster> secondary;
 
@@ -23,7 +25,7 @@ public class PlayerGuns : MonoBehaviour
 
     private void Start()
     {
-        CollisionChecker.onDeath += Death;
+        CollisionChecker.OnDeath += Death;
     }
 
     void Update()
@@ -94,7 +96,7 @@ public class PlayerGuns : MonoBehaviour
 
     void Death()
     {
-        CollisionChecker.onDeath -= Death;
+        CollisionChecker.OnDeath -= Death;
         this.enabled = false;
     }
 

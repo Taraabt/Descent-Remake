@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        CollisionChecker.onDeath += Death;
+        CollisionChecker.OnDeath += Death;
 
         rb = this.gameObject.GetComponent<Rigidbody>();
     }
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Death()
     {
-        CollisionChecker.onDeath -= Death;
+        CollisionChecker.OnDeath -= Death;
         this.enabled = false;
     }
 
