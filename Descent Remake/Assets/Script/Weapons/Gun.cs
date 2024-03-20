@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class Gun : ScriptableObject
@@ -9,7 +10,7 @@ public class Gun : ScriptableObject
     public float ReloadTime = 1;
     public float MaxHitScanLenght = 1;
     public float dmg = 1;
-
+    public Sprite gunSprite;
 
 
     public bool isProjectile;
