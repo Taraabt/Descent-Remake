@@ -16,6 +16,5 @@ MonoBehaviour:
   ReloadTime: 0.01
   MaxHitScanLenght: 1
   dmg: 1
-  spawnPoint: {fileID: 8069027993632121978, guid: f6eb05ee1b043964f942649f82ba8dae,
-    type: 3}
+  gunSprite: {fileID: 21300000, guid: 3bf39d6a015adf745aa14c2d3198fcb0, type: 3}
   isProjectile: 1
