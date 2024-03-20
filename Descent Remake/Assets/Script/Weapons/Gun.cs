@@ -31,12 +31,9 @@ public class Gun : ScriptableObject
         }
     }
 
-    public void EnemyShoot(MagType ammoType, Transform spawnPoint, Transform target)
+    public void EnemyShoot(MagType ammoType, Transform spawnPoint)
     {
-        Vector3 dir = target.position - spawnPoint.position;
-        Transform bulletTransform = Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
-        EnemyBullet bullet = bulletTransform.GetComponent<EnemyBullet>();
-        bullet.direction = dir;
+        Instantiate(ammoType.bullet, spawnPoint.position, spawnPoint.root.rotation);
     }
 
     public void SpawnPojectile(MagType ammoType, Transform spawnPoint)

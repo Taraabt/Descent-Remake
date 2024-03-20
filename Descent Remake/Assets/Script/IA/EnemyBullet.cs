@@ -14,7 +14,7 @@ public class EnemyBullet : Damage
     {
         pos = transform.position;
 
-        pos += speed * Time.deltaTime * direction.normalized;
+        pos += speed * Time.deltaTime * transform.forward; //direction.normalized;
 
         transform.position = pos;
     }

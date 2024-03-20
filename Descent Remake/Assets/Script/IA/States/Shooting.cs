@@ -38,7 +38,7 @@ public class Shooting : BaseEnemyStates
 
         if (enemy.reloadTimer >= enemy.enemyGun.gun.ReloadTime)
         {
-            enemy.enemyGun.gun.EnemyShoot(enemy.enemyGun.magType, enemy.transform, enemy.player);
+            enemy.enemyGun.gun.EnemyShoot(enemy.enemyGun.magType, enemy.transform);
             enemy.reloadTimer = 0;
         }
         else

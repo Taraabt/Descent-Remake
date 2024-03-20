@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class Key : MonoBehaviour ,ICollectable
 {
-    [SerializeField]PlayerMovement player;
+    PlayerMovement player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerMovement>() ;
+    }
 
     public void OnCollisionEnter()
     {
