@@ -62,14 +62,14 @@ public class PlayerGuns : MonoBehaviour
         mag2 = secondary[index2].magType;
 
 
-        if (Input.GetButtonDown("Fire1") && reloadedPrimary)
+        if (Input.GetButton("Fire1") && reloadedPrimary)
         {
 
             gun1.Shoot(mag1, gunTransform);
             StartCoroutine(ReloadTime(gun1.ReloadTime, true));
         }
 
-        if (Input.GetButtonDown("Fire2") && reloadedSecondary)
+        if (Input.GetButton("Fire2") && reloadedSecondary)
         {
 
             gun2.Shoot(mag2, gunTransform);

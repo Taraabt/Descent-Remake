@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Key : MonoBehaviour ,ICollectable
+public class Key : MonoBehaviour, ICollectable
 {
     PlayerMovement player;
 
-    private void Awake()
+    private void OnCollisionEnter(Collision collision)
     {
-        player = FindObjectOfType<PlayerMovement>() ;
+        if (collision.transform.TryGetComponent(out player))
+        {
+            Collect();
+        }
     }
 
-    public void OnCollisionEnter()
+    public void Collect()
     {
         player.hasKey = true;
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
-
-
-
 }

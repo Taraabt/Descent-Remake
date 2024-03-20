@@ -5,8 +5,5 @@ using UnityEngine;
 
 public interface ICollectable 
 {
-
-    void OnCollisionEnter();
-       
-
+    public void Collect();
 }

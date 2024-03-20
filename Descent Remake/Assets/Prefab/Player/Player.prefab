@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6237005114948809942}
   - component: {fileID: 1222122332604313206}
   - component: {fileID: 2272354047962664216}
-  - component: {fileID: 1965840551003207937}
   - component: {fileID: 3791641439302893090}
   m_Layer: 16
   m_Name: Player
@@ -145,20 +144,6 @@ MonoBehaviour:
   rotationSpeed: 360
   mouseSensitivity: 1
   speed: 10
---- !u!114 &1965840551003207937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4267732638711118508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63672a13264eafb448d6cd0a1536151a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  rb: {fileID: 4041890383555110774}
 --- !u!114 &3791641439302893090
 MonoBehaviour:
   m_ObjectHideFlags: 0
