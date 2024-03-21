@@ -1,22 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class MoveDoor : MonoBehaviour
 {
 
-    [SerializeField] Door door;
-    Vector3 startPos;
+
+    [Tooltip("this is the direction to move this pice of the door (remeber +1 x = right +1 y = up +1 z = forward)")]
     [SerializeField] Vector3 dirPos;
+
+    [Tooltip("this is the distance from the start position that this pice of the door has to reach (default: 5)")]
+    [SerializeField] float distanceFromStart = 5;
+
+    [Tooltip("how fast it goes form one end to the other (default: 5)")]
+    [SerializeField] float speed = 5;
+
+
+    Door door;
+    Vector3 startPos;
+    Vector3 endPos;
     bool canOpen, isOpen;
     float time = 0;
     float duration = 0;
     float lerpDur = 0;
-    [SerializeField] PlayerMovement player;
+    PlayerMovement player;
     Transform parent;
 
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerMovement>();
+        parent = transform.root;
+        door = parent.GetComponent<Door>();
+    }
 
     private void OnEnable()
     {
@@ -29,7 +42,19 @@ public class MoveDoor : MonoBehaviour
             door.OnDoorOpen += Move;
         }
         door.OnCloseDoor += Close;
+        door.OnStayDoor += Stay;
     }
+
+    private void Start()
+    {
+        lerpDur = door.lerpDuration;
+        isOpen = false;
+        time = 0;
+        startPos = transform.localPosition;
+        endPos = startPos + dirPos * distanceFromStart;
+
+    }
+
 
     private void OnDisable()
     {
@@ -49,61 +74,80 @@ public class MoveDoor : MonoBehaviour
 
         if (canOpen && !isOpen)
         {
+             
             parent.gameObject.layer = 17;
-            if (time < lerpDur)
+            if (time <= lerpDur)
             {
-                transform.localPosition = Vector3.Lerp(startPos, startPos + dirPos * 5, time / lerpDur);
+                transform.localPosition = Vector3.Lerp(startPos, endPos, time / lerpDur);
                 time += Time.deltaTime;
             }
             else
             {
                 isOpen = true;
-                canOpen = false;
+                //canOpen = false;
+                time = lerpDur;
+                transform.localPosition = endPos;
                 duration = door.duration;
             }
 
         }
-        else if (isOpen == true && duration > 0)
+        else if ((isOpen == true || canOpen == false) && duration > 0)
         {
-            time = 0;
+            if (time <= lerpDur)
+            {
+                transform.localPosition = Vector3.Lerp(startPos, endPos, time / lerpDur);
+                time += Time.deltaTime;
+            }
+            else
+            {
+                time = lerpDur;
+                transform.localPosition = endPos;
+                isOpen = true;
+            }
+          
+            
             duration -= Time.deltaTime;
 
         }
         else if (isOpen == true && duration <= 0 && canOpen == false)
         {
+            
             parent.gameObject.layer = 0;
-            if (time < lerpDur)
+            if (time >= 0)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, time / lerpDur);
-                time += Time.deltaTime;
+                transform.localPosition = Vector3.Lerp(startPos, endPos, time / lerpDur);
+                time -= Time.deltaTime;
             }
             else
             {
                 time = 0;
-                canOpen = false;
+                time = lerpDur;
+                transform.localPosition = startPos;
+                //canOpen = false;
                 isOpen = false;
             }
         }
     }
-    private void Start()
-    {
-        player.GetComponent<PlayerMovement>();
-        lerpDur = door.lerpDuration;
-        isOpen = false;
-        time = 0;
-        startPos = transform.localPosition;
-        parent = transform.parent;
-    }
+
 
 
     void Close()
     {
         canOpen = false;
         isOpen = true;
+        //time = lerpDur;
+    }
+
+    private void Stay()
+    {
+        canOpen = true;
+        duration = door.duration;
     }
 
     public void Move()
     {
+        duration = door.duration;
+        //time = 0;
         canOpen = true;
         isOpen = false;
         //StartCoroutine(OpenDoor());
@@ -112,18 +156,19 @@ public class MoveDoor : MonoBehaviour
     {
         if (player.hasKey == true)
         {
+            duration = door.duration;
+            //time = 0;
             canOpen = true;
             isOpen = false;
         }
     }
-
 
 }
 
 
 //IEnumerator OpenDoor()
 //{
-//    Debug.Log("opendoor");
+//     ("opendoor");
 //    reloadTimer = 0;
 //    if (!isOpen)
 //    {
@@ -145,7 +190,7 @@ public class MoveDoor : MonoBehaviour
 //}
 //IEnumerator CloseDoor()
 //{
-//    Debug.Log("closedoor");
+//     ("closedoor");
 //    reloadTimer=0;
 //    if (isOpen)
 //    {

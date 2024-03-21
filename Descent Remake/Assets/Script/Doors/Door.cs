@@ -7,8 +7,10 @@ public class Door : MonoBehaviour
 {
     public delegate void OpenDoor();
     public delegate void CloseDoor();
+    public delegate void StayDoor();
     public event OpenDoor OnDoorOpen;
     public event OpenDoor OnCloseDoor;
+    public event StayDoor OnStayDoor;
     public float duration;
     public float lerpDuration;
     public bool needsKey;
@@ -23,7 +25,7 @@ public class Door : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Debug.Log(other.name, other.transform);
-        OnDoorOpen();
+        OnStayDoor();
     }
 
     private void OnTriggerExit(Collider other)
