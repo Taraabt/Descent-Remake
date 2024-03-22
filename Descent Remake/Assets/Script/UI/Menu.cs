@@ -14,18 +14,18 @@ public class Menu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-    } 
-    //public void OnPointerEnter()
+    }
+    //public void OnPointerEnter(Collision collision)
     //{
     //    Color color = new Color(1f, 144 / 255f, 0f);
-    //    TMP_Text text = this.GetComponent<TMP_Text>();
+    //    TMP_Text text = collision.gameObject.GetComponent<TMP_Text>();
     //    Debug.Log("yes");
     //    text.color = color;
     //}
-    //public void OnPointerExit()
+    //public void OnPointerExit(Collision collision)
     //{
-    //    Color color = new Color(1f,1f,1f);
-    //    TMP_Text text = this.GetComponent<TMP_Text>();
+    //    Color color = new Color(1f, 1f, 1f);
+    //    TMP_Text text = collision.gameObject.GetComponent<TMP_Text>();
     //    Debug.Log("no");
     //    text.color = color;
     //}
