@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: edeac4c2697d12a45802de8946cafb4b
+guid: c3a00f526cb5e7e4aa5d92a501b822ae
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: CannoneVulcan1
-    second: {fileID: 2100000, guid: c35e4c9711fe38a4ca28203d4f419d52, type: 2}
+      name: Missile
+    second: {fileID: 2100000, guid: 4637f66792beee44cbedff05bf182639, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 500
+    globalScale: 250
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -95,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 5
+    globalScale: 2.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
