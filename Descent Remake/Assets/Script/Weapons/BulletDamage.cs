@@ -1,29 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerGuns;
 
 public class BulletDamage : Damage
 {
-    [SerializeField] PlayerGuns player;
+    PlayerGuns player;
 
     public delegate void imDead(int number);
     public event imDead OnDead;
 
-    private void Start()
-    {
-        player = FindObjectOfType<PlayerGuns>();
-        damage = player.gun1.dmg;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.TryGetComponent<Hp>(out var hp))
+        if (other.transform.TryGetComponent<IHp>(out var hp))
         {
-            hp.hp -= damage;
-            if (hp.hp <= 0)
-            {
-                hp.Death();
-            }
+            hp.TakeDmg(damage);
         }
 
         Destroy(gameObject);

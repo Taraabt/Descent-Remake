@@ -41,7 +41,7 @@ public class UI : MonoBehaviour
 
 
         PlayerHp playerHp = player.GetComponent<PlayerHp>();
-        float hp = Mathf.Round(playerHp.hp);
+        float hp = Mathf.Round(playerHp.HP);
         Debug.Log(images[3].name);
         float x = Mathf.Lerp(minX, 1f, hp/100);
         float y = Mathf.Lerp(minY, 1f, hp/100);

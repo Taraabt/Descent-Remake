@@ -17,7 +17,6 @@ public class PlayerGuns : MonoBehaviour
     public MagType mag1, mag2;
 
     [SerializeField] Transform gunTransform;
-
     bool
         reloadedPrimary = true,
         reloadedSecondary = true;
@@ -64,14 +63,13 @@ public class PlayerGuns : MonoBehaviour
 
         if (Input.GetButton("Fire1") && reloadedPrimary)
         {
-
             gun1.Shoot(mag1, gunTransform);
             StartCoroutine(ReloadTime(gun1.ReloadTime, true));
+            
         }
 
         if (Input.GetButton("Fire2") && reloadedSecondary)
         {
-
             gun2.Shoot(mag2, gunTransform);
             StartCoroutine(ReloadTime(gun2.ReloadTime, false));
         }

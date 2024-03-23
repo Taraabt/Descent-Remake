@@ -4,8 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class EnemyAI : Hp
+public class EnemyAI : MonoBehaviour, IHp
 {
+
+    [SerializeField] float myHp;
 
     [Header("If it gets stuck")]
     public List<Vector3> rayCastDirs;
@@ -58,8 +60,7 @@ public class EnemyAI : Hp
     [HideInInspector] public float distToPositons;
     [HideInInspector] public bool isFirstLostCheckDone;
 
-
-
+    public float HP { get; set; }
 
     public void OnChangeState(BaseEnemyStates newState)
     {
@@ -70,6 +71,7 @@ public class EnemyAI : Hp
 
     private void Start()
     {
+        HP = myHp;
         startPos = transform.position;
         player = FindObjectOfType<PlayerMovement>().transform;
         playerPositions = new();
@@ -95,26 +97,31 @@ public class EnemyAI : Hp
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.layer == 16)
-        {
-            Hp playerHp = player.GetComponent<Hp>();
-            playerHp.hp -= contactDmg;
-            if (playerHp.hp <= 0)
+            if (collision.transform.TryGetComponent(out IHp other))
             {
-                playerHp.Death();
+                other.TakeDmg(contactDmg);
             }
-            hp -= player.GetComponent<PlayerGuns>().contactDmg;
-        }
 
     }
 
     // THIS IS WHERE THE FUNCTIONS START:
 
-    public override void Death()
+    public void TakeDmg(float dmg)
     {
-        Destroy(gameObject);
+        HP -= dmg;
+        if (HP <= 0)
+        {
+            // animation???
+            Destroy(gameObject);
+        }
+    }
+
+    public void HpUp(float heal)
+    {
+
     }
 
     private void OnDestroy()
@@ -318,6 +325,8 @@ public class EnemyAI : Hp
 
 
     }
+
+
 #endif
 
 }

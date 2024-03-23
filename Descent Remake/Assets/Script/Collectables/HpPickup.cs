@@ -5,7 +5,7 @@ using UnityEngine;
 public class HpPickup : MonoBehaviour, ICollectable
 {
     [SerializeField] float hpUp;
-    Hp tempHp;
+    IHp tempHp;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +17,7 @@ public class HpPickup : MonoBehaviour, ICollectable
 
     public void Collect()
     {
-        tempHp.hp += hpUp;
+        tempHp.HpUp (hpUp);
         Destroy(gameObject);
     }
 }

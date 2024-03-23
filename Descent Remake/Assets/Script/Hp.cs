@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hp : MonoBehaviour
-{
-    public float hp = 1;
+public interface IHp
 
-    public virtual void Death()
-    {
-        Destroy(gameObject);
-        // do the dead
-    }
+{
+    public float HP { get; set; }
+
+    public void TakeDmg(float dmg);
+    public void HpUp(float heal);
 }
