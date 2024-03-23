@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,12 +35,17 @@ public class Gun : ScriptableObject
 
     public void EnemyShoot(MagType ammoType, Transform spawnPoint)
     {
-        Instantiate(ammoType.bullet, spawnPoint.position, spawnPoint.root.rotation);
+        SpawnPojectile(ammoType,spawnPoint);
     }
 
     public void SpawnPojectile(MagType ammoType, Transform spawnPoint)
     {
-        Instantiate(ammoType.bullet, spawnPoint.position, Quaternion.Euler(spawnPoint.root.eulerAngles));
+        Transform projectile = Instantiate(ammoType.bullet, spawnPoint.position, spawnPoint.root.rotation);
+        
+        foreach(Damage projectileDmg in projectile.GetComponentsInChildren<Damage>())
+        {
+            projectileDmg.damage = dmg;
+        }
     }
 
     public void HitScanRay(Transform spawnPoint)
@@ -49,14 +55,9 @@ public class Gun : ScriptableObject
         {
             Debug.Log("i hit this", hit.transform);
 
-            if (hit.transform.TryGetComponent<Hp>(out Hp hpClass))
+            if (hit.transform.TryGetComponent(out IHp hpClass))
             {
-                hpClass.hp -= dmg;
-
-                if (hpClass.hp <= 0)
-                {
-                    hpClass.Death();
-                }
+                hpClass.TakeDmg(dmg);
             }
 
 

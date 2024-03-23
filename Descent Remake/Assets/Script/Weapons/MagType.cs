@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class MagType : ScriptableObject
 {
-    public Transform mags;
     public Transform bullet;
     public Ammo ammo;
 }

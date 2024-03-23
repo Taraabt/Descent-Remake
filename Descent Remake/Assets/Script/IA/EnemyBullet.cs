@@ -22,13 +22,9 @@ public class EnemyBullet : Damage
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.TryGetComponent<Hp>(out var hp))
+        if(other.transform.TryGetComponent<IHp>(out var hp))
         {
-            hp.hp -= damage;
-            if (hp.hp <= 0)
-            {
-                hp.Death();
-            }
+            hp.TakeDmg(damage);
         }
 
         Destroy(gameObject);

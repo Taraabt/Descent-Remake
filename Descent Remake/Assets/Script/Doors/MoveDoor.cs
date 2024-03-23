@@ -10,9 +10,6 @@ public class MoveDoor : MonoBehaviour
     [Tooltip("this is the distance from the start position that this pice of the door has to reach (default: 5)")]
     [SerializeField] float distanceFromStart = 5;
 
-    [Tooltip("how fast it goes form one end to the other (default: 5)")]
-    [SerializeField] float speed = 5;
-
 
     Door door;
     Vector3 startPos;

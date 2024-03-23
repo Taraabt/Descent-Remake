@@ -4,23 +4,44 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
-    bool quitting = false;
 
-    LayerMask layersAffected;
+    [SerializeField] LayerMask layersAffected;
 
     public float radiousExplosion;
 
-    private void OnApplicationQuit()
+    float damage;
+
+    private void Start()
     {
-        quitting = true;
+        damage = GetComponent<BulletDamage>().damage;
     }
 
     private void OnDestroy()
     {
-        if (quitting) 
+        if (Application.isPlaying == false)
             return;
 
+        damage = GetComponent<BulletDamage>().damage;
+
         Collider[] targets = Physics.OverlapSphere(transform.position, radiousExplosion, layersAffected);
-        // remeber to hurt the enemies 
+        foreach (Collider target in targets)
+        {
+            if (target.TryGetComponent<IHp>(out var enemyHp))
+            {
+                enemyHp.TakeDmg(damage);
+            }
+        }
     }
+
+
+#if UNITY_EDITOR
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radiousExplosion);
+    }
+
+#endif
+
 }

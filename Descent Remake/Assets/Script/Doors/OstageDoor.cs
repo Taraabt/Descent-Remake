@@ -2,34 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OstageDoor : Hp
+public class OstageDoor : MonoBehaviour, IHp
 {
+    public float HP { get; set; }
+    [SerializeField] float myHp;
 
-    //public void OnCollisionEnter(Collision collision)
-    //{
-    //    Debug.Log("hello", collision.gameObject);
-    //    BulletDamage x = collision.gameObject.GetComponent<BulletDamage>();
-    //    hp -= x.damage;
-
-    //    //particellare danno sulla porta
-
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    BulletDamage x = other.gameObject.GetComponent<BulletDamage>();
-    //    hp -= x.damage;
-
-    //    if (hp <= 0)
-    //    {
-    //        Death();
-    //    }
-    //}
-
-    public override void Death()
+    private void Awake()
     {
-        // do the particles 
-        base.Death();
-        //Destroy(gameObject);
+        HP = myHp;
+    }
+
+
+    public void HpUp(float heal)
+    {
+
+    }
+
+    public void TakeDmg(float dmg)
+    {
+        HP -= dmg;
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

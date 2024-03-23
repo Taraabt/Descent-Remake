@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7005338953000066177}
   - component: {fileID: 3048087352382446111}
   - component: {fileID: 8485313222476782534}
-  - component: {fileID: 1413718851317495462}
   - component: {fileID: 7317778186731038127}
+  - component: {fileID: 7262416076533414501}
   m_Layer: 9
   m_Name: Cannon
   m_TagString: Untagged
@@ -107,20 +107,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1413718851317495462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6516810932965922328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b6a6a22b75f90488d429d2e3a33661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  bullets: []
 --- !u!114 &7317778186731038127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +120,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  player: {fileID: 1222122332604313206, guid: 69f52d386014d7440bd06075c94a68e9, type: 3}
+--- !u!114 &7262416076533414501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516810932965922328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03978d56b94843f4996d0271c89383f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiousExplosion: 3
