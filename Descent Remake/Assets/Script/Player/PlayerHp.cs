@@ -27,6 +27,7 @@ public class PlayerHp : MonoBehaviour, IHp
     public void TakeDmg(float dmg)
     {
         HP -= dmg;
+        Debug.Log(HP);
         if (HP <= 0)
         {
             HP = 0;

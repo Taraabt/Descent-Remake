@@ -97,7 +97,7 @@ public class EnemyAI : MonoBehaviour, IHp
     }
 
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 16)
             if (collision.transform.TryGetComponent(out IHp other))
