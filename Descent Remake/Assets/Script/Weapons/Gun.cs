@@ -12,11 +12,14 @@ public class Gun : ScriptableObject
     public float MaxHitScanLenght = 1;
     public float dmg = 1;
     public Sprite gunSprite;
+    
+    [SerializeField, Tooltip("this refers to the radius of the collision sphere ray that i use for the hitscans")] 
+    float hitScanRadius;
 
 
     public bool isProjectile;
 
-    public void Shoot(MagType ammoType, Transform spawnPoint)
+    public void Shoot(MagType ammoType, Transform spawnPoint, Vector3 dir)
     {
         if (ammoType.ammo.ammo >= ammoPerShot)
         {
@@ -28,7 +31,7 @@ public class Gun : ScriptableObject
             }
             else
             {
-                HitScanRay(spawnPoint);
+                HitScanRay(spawnPoint, ammoType,dir);
             }
         }
     }
@@ -48,13 +51,11 @@ public class Gun : ScriptableObject
         }
     }
 
-    public void HitScanRay(Transform spawnPoint)
+    public void HitScanRay(Transform spawnPoint, MagType ammoType, Vector3 dir)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
+        Instantiate(ammoType.bullet, spawnPoint.position, spawnPoint.root.rotation,spawnPoint.root);
+        if (Physics.SphereCast(spawnPoint.position, hitScanRadius, dir, out RaycastHit hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
         {
-            Debug.Log("i hit this", hit.transform);
-
             if (hit.transform.TryGetComponent(out IHp hpClass))
             {
                 hpClass.TakeDmg(dmg);
