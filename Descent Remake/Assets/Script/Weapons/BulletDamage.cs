@@ -13,12 +13,6 @@ public class BulletDamage : Damage
 
     private void OnTriggerEnter(Collider other)
     {
-        if(damage == 0)
-        {
-            Destroy(gameObject,2); 
-            return;
-        }
-
         if (other.transform.TryGetComponent<IHp>(out var hp))
         {
             hp.TakeDmg(damage);
@@ -29,7 +23,7 @@ public class BulletDamage : Damage
 
     private void OnDestroy()
     {
-        if (Application.isPlaying && OnDead != null)
+        if (Application.isPlaying)
             OnDead.Invoke(1);
     }
 }

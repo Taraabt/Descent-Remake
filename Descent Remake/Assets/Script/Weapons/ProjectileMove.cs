@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileMove : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] float speed;
     [SerializeField] BulletDamage[] bullets;
     float totDied = 0;
 
@@ -30,7 +30,7 @@ public class ProjectileMove : MonoBehaviour
     {
         Vector3 pos = transform.position;
 
-        pos += speed * Time.deltaTime * transform.forward;
+        pos += transform.forward * speed * Time.deltaTime;
 
         //pos.z += speed * Time.deltaTime;
 
@@ -39,9 +39,9 @@ public class ProjectileMove : MonoBehaviour
 
     void AllAreDead(int plus)
     {
-        totDied += plus;
+        totDied+= plus;
 
-        if (totDied >= bullets.Length)
+        if(totDied >= bullets.Length)
         {
             Destroy(gameObject);
         }

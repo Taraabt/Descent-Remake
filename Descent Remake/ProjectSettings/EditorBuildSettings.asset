@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Cutscene.unity
     guid: 5364081dde1a2b746ba3ce21ee930d81
   - enabled: 0
-    path: Assets/Scenes/Test/Enemy IA.unity
+    path: Assets/Scenes/Enemy IA.unity
     guid: be431b255ab640d41983ca35fb91a1ab
   - enabled: 1
     path: Assets/Scenes/Map.unity

@@ -27,12 +27,8 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        PlayerGuns pGuns =player.GetComponent<PlayerGuns>();
-
-        if (pGuns == null)
-            return;
-
         Debug.Log(texts[2].text);
+        PlayerGuns pGuns =player.GetComponent<PlayerGuns>();
         int ammo1 = (int)Mathf.Round(pGuns.mag1.ammo.ammo);
         Debug.Log("cazzo palle");
         images[1].sprite=pGuns.gun1.gunSprite;

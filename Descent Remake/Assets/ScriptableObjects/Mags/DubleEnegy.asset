@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c0d64f3a9adcb4c9dfe056ca3d815a, type: 3}
   m_Name: DubleEnegy
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2829816006160549515, guid: 4d187f76fc879314e9d549415347f27e, type: 3}
+  mags: {fileID: 6382227263206717801, guid: 8aa19a8ca1ee3ef42af0aab5bf024f70, type: 3}
+  bullet: {fileID: 6216604623322067488, guid: b19792ce19d0db1418f6c2bb54649825, type: 3}
   ammo: {fileID: 11400000, guid: 2e236e1d2d40a7f499001e0a4213e953, type: 2}

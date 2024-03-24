@@ -42,7 +42,7 @@ public class PlayerGuns : MonoBehaviour
             if (index1 >= primary.Count)
             {
                 index1 = 0;
-
+                
             }
         }
         else if (changeWeapon < 0) // pressed Q
@@ -63,14 +63,14 @@ public class PlayerGuns : MonoBehaviour
 
         if (Input.GetButton("Fire1") && reloadedPrimary)
         {
-            gun1.Shoot(mag1, gunTransform, transform.forward.normalized);
+            gun1.Shoot(mag1, gunTransform);
             StartCoroutine(ReloadTime(gun1.ReloadTime, true));
-
+            
         }
 
         if (Input.GetButton("Fire2") && reloadedSecondary)
         {
-            gun2.Shoot(mag2, gunTransform, transform.forward.normalized);
+            gun2.Shoot(mag2, gunTransform);
             StartCoroutine(ReloadTime(gun2.ReloadTime, false));
         }
 
@@ -128,7 +128,7 @@ public class PlayerGuns : MonoBehaviour
         }
 
         int x = 10;
-        while (x < 100)
+        while (x<100)
         {
             x++;
             yield return null;
@@ -137,18 +137,4 @@ public class PlayerGuns : MonoBehaviour
         isopen = false;
     }
 
-
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-
-            Ray ray = new Ray(transform.position, transform.forward * gun1.MaxHitScanLenght);
-            Gizmos.DrawRay(ray);
-        }
-    }
-#endif
 }

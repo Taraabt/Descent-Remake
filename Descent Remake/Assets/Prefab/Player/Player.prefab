@@ -85,8 +85,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20.41222, y: 13.306449, z: 26.370337}
-  m_Center: {x: -0.057178497, y: -3.5636296, z: -0.13748217}
+  m_Size: {x: 6.2373867, y: 4.169628, z: 14.689669}
+  m_Center: {x: -0.13382745, y: -1.1636105, z: 0.13511467}
 --- !u!114 &1222122332604313206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,12 +183,12 @@ PrefabInstance:
     - target: {fileID: 8069027993632121978, guid: f6eb05ee1b043964f942649f82ba8dae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.467
       objectReference: {fileID: 0}
     - target: {fileID: 8069027993632121978, guid: f6eb05ee1b043964f942649f82ba8dae,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 8069027993632121978, guid: f6eb05ee1b043964f942649f82ba8dae,
         type: 3}
@@ -257,17 +257,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 06c737ae8d24974439b2db34f95c4d35,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 06c737ae8d24974439b2db34f95c4d35,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 06c737ae8d24974439b2db34f95c4d35,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 06c737ae8d24974439b2db34f95c4d35,
         type: 3}
@@ -503,11 +503,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1967972323279671551}
     m_Modifications:
-    - target: {fileID: 2809542449055100230, guid: da26a9cabef54db47b764519d560135a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5937128120124502746, guid: da26a9cabef54db47b764519d560135a,
         type: 3}
       propertyPath: m_LocalPosition.x
