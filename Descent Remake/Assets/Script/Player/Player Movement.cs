@@ -58,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
         oldX = x;
         oldY = y;
 
-
         float rearInput=Input.GetAxisRaw("Rear");
         if (Input.GetButtonDown("Rear"))
         {
