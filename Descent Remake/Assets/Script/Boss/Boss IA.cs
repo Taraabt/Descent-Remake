@@ -7,6 +7,7 @@ public class BossIA : MonoBehaviour, IHp
     public float HP { get; set; }
     [SerializeField] float bossHp;
     Animator myAnimator;
+    [SerializeField]ParticleSystem esplosion;
     [SerializeField] float bossView;
     [SerializeField] BossBullet bossBullet;
     [SerializeField] GameObject player;
@@ -33,6 +34,8 @@ public class BossIA : MonoBehaviour, IHp
         if (HP <= 0)
         {
             myAnimator.enabled = false;
+            Instantiate(esplosion,transform.position,Quaternion.identity);
+            Destroy(gameObject);
         }
     }
     private void OnDrawGizmos()
@@ -48,7 +51,7 @@ public class BossIA : MonoBehaviour, IHp
         for (int i = 0; i < collider.Length; i++) {
             if (collider[i] != null)
             {
-                transform.LookAt(player.transform.position);
+                //transform.LookAt(player.transform.position);
                 if (remainingtime <= 0)
                 {
                     remainingtime = shootingTimer;

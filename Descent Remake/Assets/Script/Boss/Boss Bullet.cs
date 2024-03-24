@@ -5,13 +5,13 @@ using UnityEngine;
 public class BossBullet : Damage
 {
 
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerMovement player;
     [SerializeField] float speed;
     Rigidbody rb;
     Vector3 dir;
     private void Awake()
     {
-        player.GetComponent<PlayerMovement>();
+        player = GameObject.FindAnyObjectByType<PlayerMovement>();
         rb=this.GetComponent<Rigidbody>();
     }
     private void Start()
@@ -20,9 +20,15 @@ public class BossBullet : Damage
         dir = dir.normalized;
         rb.velocity = speed * dir;
     }
-    private void Update()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("pos player"+ player.transform.position);
+        if (collision.transform.TryGetComponent<IHp>(out var hp))
+        {
+            hp.TakeDmg(damage);
+        }
+        Destroy(gameObject);
     }
+
 
 }
