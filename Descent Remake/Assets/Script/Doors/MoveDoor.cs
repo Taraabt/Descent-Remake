@@ -24,7 +24,7 @@ public class MoveDoor : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<PlayerMovement>();
-        parent = transform.root;
+        parent = transform.parent;
         door = parent.GetComponent<Door>();
     }
 

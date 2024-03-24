@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoType: {fileID: 11400000, guid: de1dcbdbfc054354e8408a6adc673073, type: 2}
+  addAmmo: 5
 --- !u!65 &-4289323164388664931
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139,5 +140,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.01, y: 2, z: 18.13}
+  m_Size: {x: 6.01, y: 5.92, z: 18.13}
   m_Center: {x: 0, y: 0, z: 0}

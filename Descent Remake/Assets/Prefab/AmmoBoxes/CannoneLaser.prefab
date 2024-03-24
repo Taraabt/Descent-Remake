@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ac07cc2f2d59de64f8dfec0b87f05e8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -726.7
+      value: 1024.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac07cc2f2d59de64f8dfec0b87f05e8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -56.9
+      value: -496.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac07cc2f2d59de64f8dfec0b87f05e8d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -532.5
+      value: 374.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac07cc2f2d59de64f8dfec0b87f05e8d,
         type: 3}
@@ -75,6 +75,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -3583840137439678229}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac07cc2f2d59de64f8dfec0b87f05e8d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 50453384738055692}
   m_SourcePrefab: {fileID: 100100000, guid: ac07cc2f2d59de64f8dfec0b87f05e8d, type: 3}
 --- !u!1 &790261261123961126 stripped
 GameObject:
@@ -124,3 +128,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.12, y: 5.54, z: 26.33}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &50453384738055692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790261261123961126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d255baf29697543a6adcdd1322ddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPickup:
+    IsEnemy: 0
+    gun: {fileID: 0}
+    magType: {fileID: 0}
+    isPrimary: 1

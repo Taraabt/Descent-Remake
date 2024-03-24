@@ -30,7 +30,7 @@ public class ProjectileMove : MonoBehaviour
     {
         Vector3 pos = transform.position;
 
-        pos += transform.forward * speed * Time.deltaTime;
+        pos += speed * Time.deltaTime * transform.forward;
 
         //pos.z += speed * Time.deltaTime;
 
@@ -39,9 +39,9 @@ public class ProjectileMove : MonoBehaviour
 
     void AllAreDead(int plus)
     {
-        totDied+= plus;
+        totDied += plus;
 
-        if(totDied >= bullets.Length)
+        if (totDied >= bullets.Length)
         {
             Destroy(gameObject);
         }

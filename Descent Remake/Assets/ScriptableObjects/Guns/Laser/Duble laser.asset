@@ -17,4 +17,5 @@ MonoBehaviour:
   MaxHitScanLenght: 1
   dmg: 1
   gunSprite: {fileID: 21300000, guid: 6ca2a6ad3ac045b43b0f5e39d0bd0e96, type: 3}
-  isProjectile: 1
+  hitScanRadius: 0.5
+  isProjectile: 0
