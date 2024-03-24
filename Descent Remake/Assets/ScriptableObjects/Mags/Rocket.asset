@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c0d64f3a9adcb4c9dfe056ca3d815a, type: 3}
+  m_Name: Rocket
+  m_EditorClassIdentifier: 
+  mags: {fileID: 6382227263206717801, guid: 5218924d6cabd4f4e979fa161c48fe02, type: 3}
+  bullet: {fileID: 3277655864714132841, guid: 5e4326f71881379449b2083b1e5fc96f, type: 3}
+  ammo: {fileID: 11400000, guid: de1dcbdbfc054354e8408a6adc673073, type: 2}
