@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ee2f22acabc9048a21857cba9b27a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myHp: 0
+  myHp: 1
+  esplosion: {fileID: 262686960724179168, guid: 359aefce1ae68db4daff6fe58090afe8,
+    type: 3}
   rayCastDirs:
   - {x: 1, y: 0, z: 0}
   - {x: -1, y: 0, z: 0}

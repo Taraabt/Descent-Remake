@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour, IHp
 
     [SerializeField] float myHp;
 
+    [SerializeField] ParticleSystem esplosion;
     [Header("If it gets stuck")]
     public List<Vector3> rayCastDirs;
 
@@ -59,6 +60,7 @@ public class EnemyAI : MonoBehaviour, IHp
 
     [HideInInspector] public float distToPositons;
     [HideInInspector] public bool isFirstLostCheckDone;
+
 
     public float HP { get; set; }
 
@@ -114,7 +116,7 @@ public class EnemyAI : MonoBehaviour, IHp
         HP -= dmg;
         if (HP <= 0)
         {
-            // animation???
+            Instantiate(esplosion,transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
