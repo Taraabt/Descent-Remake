@@ -85,21 +85,21 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0
+        inSlope: 2.609954
+        outSlope: 2.609954
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.29283488
       - serializedVersion: 3
         time: 1
-        value: 0.47143096
-        inSlope: -1.0667228
-        outSlope: -1.0667228
+        value: 1
+        inSlope: 1.3440893
+        outSlope: 1.3440893
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.05281617
+        inWeight: 0.18068534
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -107,7 +107,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 0.32941177}
-      key1: {r: 0.7929675, g: 0.27366173, b: 0.8408158, a: 1}
+      key1: {r: 0.6588717, g: 0.2272161, b: 0.6981132, a: 1}
       key2: {r: 1, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b6a6a22b75f90488d429d2e3a33661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
+  speed: 900
   bullets: []
 --- !u!114 &1003216183223476657
 MonoBehaviour:
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c65848497d7374ea2fac1dd7a5cd40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Distance: 10
 --- !u!1 &5246840987183508955
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,21 +307,21 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0
+        inSlope: 2.609954
+        outSlope: 2.609954
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.29283488
       - serializedVersion: 3
         time: 1
-        value: 0.47143096
-        inSlope: -1.0667228
-        outSlope: -1.0667228
+        value: 1
+        inSlope: 1.3440893
+        outSlope: 1.3440893
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.05281617
+        inWeight: 0.18068534
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -328,7 +329,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 0.32941177}
-      key1: {r: 0.7929675, g: 0.27366173, b: 0.8408158, a: 1}
+      key1: {r: 0.6588717, g: 0.2272161, b: 0.6981132, a: 1}
       key2: {r: 1, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

@@ -19,7 +19,7 @@ public class Gun : ScriptableObject
 
     public bool isProjectile;
 
-    public void Shoot(MagType ammoType, Transform spawnPoint)
+    public void Shoot(MagType ammoType, Transform spawnPoint, Vector3 dir)
     {
         if (ammoType.ammo.ammo >= ammoPerShot)
         {
@@ -31,7 +31,7 @@ public class Gun : ScriptableObject
             }
             else
             {
-                HitScanRay(spawnPoint, ammoType);
+                HitScanRay(spawnPoint, ammoType,dir);
             }
         }
     }
@@ -51,10 +51,10 @@ public class Gun : ScriptableObject
         }
     }
 
-    public void HitScanRay(Transform spawnPoint, MagType ammoType)
+    public void HitScanRay(Transform spawnPoint, MagType ammoType, Vector3 dir)
     {
         Instantiate(ammoType.bullet, spawnPoint.position, spawnPoint.root.rotation,spawnPoint.root);
-        if (Physics.SphereCast(spawnPoint.position, hitScanRadius, spawnPoint.forward, out RaycastHit hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
+        if (Physics.SphereCast(spawnPoint.position, hitScanRadius, dir, out RaycastHit hit, MaxHitScanLenght /* , layerMask or layer of enemies*/))
         {
             if (hit.transform.TryGetComponent(out IHp hpClass))
             {

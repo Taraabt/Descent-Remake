@@ -1,21 +1,31 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DestroyYourself : MonoBehaviour
 {
-    Gun gun;
+    [SerializeField] float Distance = 0.3f;
+    Gun pGun;
     Vector3 startPos;
-    
+    ProjectileMove projectileMove;
+
     void Awake()
     {
-        gun = transform.root.GetComponent<PlayerGuns>().gun1;
-        StartCoroutine(GameEndMyself());
+        projectileMove = GetComponent<ProjectileMove>();
+        pGun = transform.root.GetComponent<PlayerGuns>().gun1;
+        startPos = transform.position;
     }
 
-    IEnumerator GameEndMyself()
+    private void Update()
     {
-        startPos = transform.position;
-        yield return new WaitUntil(() => Vector3.Distance(transform.position, startPos) >= gun.MaxHitScanLenght);
-        Destroy(gameObject,1);
+        if(Vector3.Distance(transform.position, startPos) >= Distance)
+        {
+            transform.parent = null;
+        }
+        else if (Vector3.Distance(transform.position, startPos) >= pGun.MaxHitScanLenght)
+        {
+            projectileMove.speed = 0;
+            Destroy(gameObject, 1);
+        }
     }
 }
