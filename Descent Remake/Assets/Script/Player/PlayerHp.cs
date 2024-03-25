@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHp : MonoBehaviour, IHp
 {
@@ -34,6 +36,7 @@ public class PlayerHp : MonoBehaviour, IHp
             if (OnDeath == null)
                 return;
             OnDeath.Invoke();
+            SceneManager.LoadScene(4);
             rb.velocity = Vector3.zero;
         }
     }

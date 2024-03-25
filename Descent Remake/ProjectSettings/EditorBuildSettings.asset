@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscene.unity
     guid: 5364081dde1a2b746ba3ce21ee930d81
-  - enabled: 0
-    path: Assets/Scenes/Test/Enemy IA.unity
-    guid: be431b255ab640d41983ca35fb91a1ab
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: f1656be4a75c6c940ab287123831b198
+  - enabled: 1
+    path: Assets/Scenes/You Win.unity
+    guid: 189793dd53289314cb20d786399fbdb3
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
+    guid: e33c5d40665e12744b8c50f03b53a471
   m_configObjects: {}
