@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
             ui[0].SetActive(true);
         }
 
-
     }
 
     private void FixedUpdate()

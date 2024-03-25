@@ -5,10 +5,11 @@ using UnityEngine;
 public class Final : MonoBehaviour
 {
 
-    [SerializeField] Animator finalcut;
+    [SerializeField]Animator finalcut;
     private void OnCollisionEnter(Collision collision)
     {
-        finalcut.SetBool("Entry",true);
+        finalcut = collision.gameObject.GetComponent<Animator>();
+        finalcut.gameObject.SetActive(true);
     }
 
 
