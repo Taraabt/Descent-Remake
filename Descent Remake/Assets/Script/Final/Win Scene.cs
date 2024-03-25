@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class WinScene : MonoBehaviour
 {
-    [SerializeField] Transform toDisable;
-
+    [SerializeField] LayerMask layerMask;
 
     private void OnCollisionEnter(Collision collision)
     {
-        toDisable.gameObject.SetActive(true);
-        SceneManager.LoadScene(3);
+        Camera.main.cullingMask = layerMask;
     }
 }

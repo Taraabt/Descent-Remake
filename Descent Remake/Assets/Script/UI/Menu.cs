@@ -15,6 +15,16 @@ public class Menu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void CreditsScene()
+    {
+        SceneManager.LoadScene(5);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     //public void OnPointerEnter(Collision collision)
     //{
     //    Color color = new Color(1f, 144 / 255f, 0f);
