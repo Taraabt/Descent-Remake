@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossIA : MonoBehaviour, IHp
 {
     public float HP { get; set; }
+    [SerializeField]GameObject bossWall;
     [SerializeField] float bossHp;
     Animator myAnimator;
     [SerializeField]ParticleSystem esplosion;
@@ -36,8 +37,21 @@ public class BossIA : MonoBehaviour, IHp
             myAnimator.enabled = false;
             Instantiate(esplosion,transform.position,Quaternion.identity);
             Destroy(gameObject);
+            bossWall.SetActive(false);
+            Bossdeath(); 
         }
     }
+
+
+    void OnEnable()
+    {
+        FinalCountdown.BossDeath+=Bossdeath;
+    }
+    void OnDisable()
+    {
+        FinalCountdown.BossDeath-=Bossdeath;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -59,6 +73,10 @@ public class BossIA : MonoBehaviour, IHp
                 }
             }
         }
+    }
+    public void Bossdeath()
+    {
+        
     }
 
 }
