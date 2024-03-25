@@ -45,10 +45,19 @@ public class Gun : ScriptableObject
     {
         Transform projectile = Instantiate(ammoType.bullet, spawnPoint.position, spawnPoint.root.rotation);
         
-        foreach(Damage projectileDmg in projectile.GetComponentsInChildren<Damage>())
+        if(projectile.TryGetComponent<Damage>(out Damage projectileDmg))
         {
             projectileDmg.damage = dmg;
         }
+        else
+        {
+            foreach (Damage projectileDamage in projectile.GetComponentsInChildren<Damage>())
+            {
+                projectileDamage.damage = dmg;
+            }
+        }
+
+        
     }
 
     public void HitScanRay(Transform spawnPoint, MagType ammoType, Vector3 dir)
@@ -60,8 +69,6 @@ public class Gun : ScriptableObject
             {
                 hpClass.TakeDmg(dmg);
             }
-
-
         }
     }
 
