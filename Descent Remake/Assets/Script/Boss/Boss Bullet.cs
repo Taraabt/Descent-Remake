@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BossBullet : Damage
 {
-
     [SerializeField] PlayerMovement player;
     [SerializeField] float speed;
     Rigidbody rb;
