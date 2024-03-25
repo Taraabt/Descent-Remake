@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5114, y: 1.5114, z: 1.5114}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5737819859505988265}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ee2f22acabc9048a21857cba9b27a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myHp: 1
+  myHp: 3
   esplosion: {fileID: 262686960724179168, guid: 359aefce1ae68db4daff6fe58090afe8,
     type: 3}
   rayCastDirs:
