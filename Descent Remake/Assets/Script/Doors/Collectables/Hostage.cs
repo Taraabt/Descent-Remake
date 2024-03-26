@@ -13,7 +13,7 @@ public class Hostage : MonoBehaviour, ICollectable
     }
     public void Collect()
     {
-        ScoreManager.score += score;
+        ScoreManager.AddScore(score);
         UI.OnScoreUpdate();
         Destroy(gameObject);
     }

@@ -22,9 +22,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float mouseSensitivity;
     [SerializeField] float speed;
 
-
+    private void Awake()
+    {
+        ScoreManager.score = 0;
+    }
     void Start()
     {
+        //ScoreManager.AddScore(-18000);
         Cursor.lockState = CursorLockMode.Locked;
 
         PlayerHp.OnDeath += Death;

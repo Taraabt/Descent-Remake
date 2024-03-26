@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp: 5
-  esplosion: {fileID: 262686960724179168, guid: 359aefce1ae68db4daff6fe58090afe8,
+  esplosion: {fileID: 3006875253372549416, guid: c15545be888fb154997a810655819a3d,
     type: 3}
   rayCastDirs:
   - {x: 1, y: 0, z: 0}

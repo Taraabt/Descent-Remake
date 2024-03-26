@@ -8,7 +8,7 @@ public class ScoreAdder : MonoBehaviour
     [SerializeField] bool destroyThis;
     private void OnDestroy()
     {
-        ScoreManager.score += scoreAmount;
+        ScoreManager.AddScore(scoreAmount);
         UI.OnScoreUpdate();
     }
 

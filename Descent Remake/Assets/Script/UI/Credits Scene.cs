@@ -14,6 +14,7 @@ public class CreditsScene : MonoBehaviour
     private void Start()
     {
         preload = SceneManager.LoadSceneAsync(2);
+        ScoreManager.score = 0;
         clip.loopPointReached += FinishClip;
         preload.allowSceneActivation = false;
     }

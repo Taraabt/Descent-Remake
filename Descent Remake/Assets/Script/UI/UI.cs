@@ -21,7 +21,7 @@ public class UI : MonoBehaviour
     {
         OnScoreUpdate += UpdateScore;
 
-        texts = GetComponentsInChildren<TMP_Text>();
+        texts = GetComponentsInChildren<TMP_Text>(true);
         images = GetComponentsInChildren<Image>();
         UpdateScore();
 
@@ -82,6 +82,9 @@ public class UI : MonoBehaviour
         float y = Mathf.Lerp(minY, 1f, hp / 100);
         images[3].rectTransform.localScale = new Vector3(x, y, 1f);
         texts[2].text = hp.ToString();
+
+
+        texts[texts.Length - 2].text=(FinalCountdown.actualMaxTime-FinalCountdown.time).ToString();
     }
 
 }

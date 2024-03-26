@@ -36,6 +36,7 @@ public class PlayerHp : MonoBehaviour, IHp
             if (OnDeath == null)
                 return;
             OnDeath.Invoke();
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(4);
             rb.velocity = Vector3.zero;
         }

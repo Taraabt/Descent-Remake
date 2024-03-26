@@ -16,6 +16,7 @@ public class Cutscene : MonoBehaviour
 
     private void Start()
     {
+        ScoreManager.score = 0;
         preload = SceneManager.LoadSceneAsync(2);
         clip.loopPointReached += FinishClip;
         preload.allowSceneActivation = false;
@@ -60,6 +61,7 @@ public class Cutscene : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(2);
+
         //preload.allowSceneActivation = true;
     }
     public void UnPause()

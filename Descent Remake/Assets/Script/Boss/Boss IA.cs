@@ -14,6 +14,8 @@ public class BossIA : MonoBehaviour, IHp
     [SerializeField] GameObject player;
     float remainingtime = 0;
     [SerializeField]float shootingTimer = 2;
+
+    [SerializeField] GameObject text;
     private void Awake()
     {
         HP= bossHp;
@@ -76,7 +78,8 @@ public class BossIA : MonoBehaviour, IHp
     }
     public void Bossdeath()
     {
-        
+        text.SetActive(true);
+        FinalCountdown.BossDeath();
     }
 
 }

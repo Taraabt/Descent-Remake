@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Star : MonoBehaviour
 {
-
-    public int scene;
+   [SerializeField]Canvas canvas;
     private void OnCollisionEnter(Collision collision)
     {
-        SceneManager.LoadScene(scene);
+        canvas.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 }

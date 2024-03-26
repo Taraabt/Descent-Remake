@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
 
+   [SerializeField]TMP_Text m_Text;
    public void StartGame(){
         SceneManager.LoadScene(1);
    }
@@ -23,6 +24,10 @@ public class Menu : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+    private void Update()
+    {
+        m_Text.text = "You Score: " + ScoreManager.score.ToString();
     }
 
     //public void OnPointerEnter(Collision collision)

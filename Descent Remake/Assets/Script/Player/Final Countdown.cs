@@ -26,10 +26,10 @@ public class FinalCountdown : MonoBehaviour
     public IEnumerator Timer()
     {
         while (time<actualMaxTime) {
-            //text.text=fianalcountdown.actualmaxtime-time
             time += Time.deltaTime;
             yield return null;
         }
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(4);
     }
     public void CallTimer()
