@@ -83,7 +83,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 70
+  m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2686478231598765664
 MonoBehaviour:
@@ -125,7 +125,7 @@ MonoBehaviour:
   rb: {fileID: 115656151358240456}
   maxDistChase: 80
   speed: 100
-  attackRange: 40
+  attackRange: 50
   dir: {x: 0, y: 0, z: 0}
   startDis: 10
   durationForUnstucking: 5
@@ -169,7 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ede9227690c2e4aa1c19bc97d8056b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 0
+  scoreAmount: 500
+  destroyThis: 0
 --- !u!1001 &2101852335987586667
 PrefabInstance:
   m_ObjectHideFlags: 0

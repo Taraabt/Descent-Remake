@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c0d64f3a9adcb4c9dfe056ca3d815a, type: 3}
   m_Name: Generic Mag ForTesting
   m_EditorClassIdentifier: 
-  mags: {fileID: 0}
-  bullet: {fileID: 5974370716573548525, guid: 1bd4fdfdbebb72e438b693d1fe298b00, type: 3}
+  bullet: {fileID: 558374643590391796, guid: cd9b618e3ee9ad54aaefe1f4e7b433a4, type: 3}
   ammo: {fileID: 11400000, guid: abcbaf11d24edce4bba341e8240b26af, type: 2}

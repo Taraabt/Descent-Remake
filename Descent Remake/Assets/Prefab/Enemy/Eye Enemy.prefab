@@ -125,7 +125,7 @@ MonoBehaviour:
   rb: {fileID: 1615718620338622641}
   maxDistChase: 110
   speed: 200
-  attackRange: 30
+  attackRange: 70
   dir: {x: 0, y: 0, z: 0}
   startDis: 10
   durationForUnstucking: 5
@@ -169,7 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ede9227690c2e4aa1c19bc97d8056b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 0
+  scoreAmount: 200
+  destroyThis: 0
 --- !u!1001 &5200089384471504194
 PrefabInstance:
   m_ObjectHideFlags: 0

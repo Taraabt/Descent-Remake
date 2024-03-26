@@ -46,7 +46,6 @@ public class EnemyAI : MonoBehaviour, IHp
     public float attackRange;
 
     public Vector3 dir;
-
     public float startDis = 0.1f;
     public float durationForUnstucking = 5f;
 
@@ -117,7 +116,7 @@ public class EnemyAI : MonoBehaviour, IHp
         if (HP <= 0)
         {
             Instantiate(esplosion,transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Destroy(gameObject);    
         }
     }
 
