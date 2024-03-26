@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 490e7e08ff3f13e47a1845863d9513b3, type: 3}
-  m_Name: SniperO_O
+  m_Name: NoMandible
   m_EditorClassIdentifier: 
   ammoPerShot: 4
   ReloadTime: 1

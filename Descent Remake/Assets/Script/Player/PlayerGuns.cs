@@ -16,7 +16,8 @@ public class PlayerGuns : MonoBehaviour
     public Gun gun1, gun2;
     public MagType mag1, mag2;
 
-    [SerializeField] Transform gunTransform;
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform RocketSpawnPoint;
     bool
         reloadedPrimary = true,
         reloadedSecondary = true;
@@ -63,14 +64,14 @@ public class PlayerGuns : MonoBehaviour
 
         if (Input.GetButton("Fire1") && reloadedPrimary)
         {
-            gun1.Shoot(mag1, gunTransform, transform.forward.normalized);
+            gun1.Shoot(mag1, spawnPoint, transform.forward.normalized);
             StartCoroutine(ReloadTime(gun1.ReloadTime, true));
 
         }
 
         if (Input.GetButton("Fire2") && reloadedSecondary)
         {
-            gun2.Shoot(mag2, gunTransform, transform.forward.normalized);
+            gun2.Shoot(mag2, RocketSpawnPoint, transform.forward.normalized);
             StartCoroutine(ReloadTime(gun2.ReloadTime, false));
         }
 

@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.76, y: 4.76, z: 18.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5216252385829935607}
@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.3551636, y: 4.2003174, z: 18.112183}
+  m_Center: {x: -0.018737793, y: -0.018676758, z: 0.52557373}
 --- !u!114 &8123503728606403835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,21 +77,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7059140139195137022}
     m_Modifications:
-    - target: {fileID: 1202491444336347391, guid: a1740409ef2b0f74da4275de7c64e1b7,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.21008404
-      objectReference: {fileID: 0}
-    - target: {fileID: 1202491444336347391, guid: a1740409ef2b0f74da4275de7c64e1b7,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.21008404
-      objectReference: {fileID: 0}
-    - target: {fileID: 1202491444336347391, guid: a1740409ef2b0f74da4275de7c64e1b7,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.055432368
-      objectReference: {fileID: 0}
     - target: {fileID: 1202491444336347391, guid: a1740409ef2b0f74da4275de7c64e1b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -147,9 +132,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Razzo
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -4289323164388664931, guid: a1740409ef2b0f74da4275de7c64e1b7, type: 3}
-    - {fileID: 316625368804324433, guid: a1740409ef2b0f74da4275de7c64e1b7, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

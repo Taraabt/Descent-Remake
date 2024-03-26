@@ -14,6 +14,7 @@ public class Hostage : MonoBehaviour, ICollectable
     public void Collect()
     {
         ScoreManager.score += score;
+        UI.OnScoreUpdate();
         Destroy(gameObject);
     }
 }
